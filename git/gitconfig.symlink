@@ -1,0 +1,7 @@
+[user]
+	name = Bruno Berzins
+	email = b72uno@gmail.com
+[github]
+	user = b72uno
+[core]
+	editor = nvim

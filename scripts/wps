@@ -1,0 +1,17 @@
+#!/bin/bash
+#using the path WALLPAPERS will select a new random wallpaper
+DIR="/media/clash/Guts/Wallpapers"
+RANGE=$(ls $DIR | wc -l)
+
+# in increments of 5 to match the line with
+# file=.... entry
+for i in 2 7; do
+  let "number = $RANDOM % $RANGE"
+  IMAGE=$(ls $DIR | head -$number | tail -1)
+  sed -i $i' c\file='"$DIR/$IMAGE"'' ~/.config/nitrogen/bg-saved.cfg
+done
+
+nitrogen --restore
+
+# Add this to crontab
+# */10 * * * * /home/bsh/.scripts/wps

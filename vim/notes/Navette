@@ -1,0 +1,51 @@
+Navette
+## Notes:
+   • _Navette_ lives on as a brand name.
+   • Composite industry as category
+   • Technologies - no spray layup, no autoclaves, just wet layup and vacuum infusions.
+   • Simple, friendly, usable.
+
+
+## TODO:
+
+   • Seperate URLs for each language domain.com/lang/content
+   • Crosslink sites? Show norwegian link on english site? Use rel=canonical to crosslinks
+   • <link rel="alternate" hreflang="en" href="http://example.com/en" />
+   • must be on links to self language version as well. In english page to english link hreflang=”en”
+   • Use rel=”alternate” hreflang=”x”
+   • Use hreflang=”x-default” for pages where you select language or the site is redirecting users
+   • Each page with its own description. Title short, description longer, up to a paragraph.
+   • Add rel="canonical" to links that refer to the same content
+   • Use 301 redirect for language swap handler, and rel="canonical" for links
+   • Make two sitemaps - One nicely styled in columns, ul-lists, and another one in <code> or <pre> for nicely styled XML sitemap which is meant for googol. Then consider adding an XML sitemap link to the human page
+   • Make a useful 404 page. Remove wildcard .* path handler. Do not allow crawlers to index invalid sites.
+   • Check relevant keywords
+   
+   • Add unique title tags
+   • Add proper alt tags to all images
+   • Home title should describe business, meta tags as well
+   • Rename images to something descriptive
+   • Block paths like /th and others (email, change locales) with robots.txt 
+
+   • Add image sitemap file
+
+   • Translate all content from english to norwegian and vice versa.
+   • Add proper imagery, use picturefill.
+   • Add Terms & Conditions, Privacy Policy.
+   • Logo redesign - themed around Marquise/Navette diamond cut, perhaps. Replace the font to something more suitable, if needed ???
+   • Check h5bp or Corry Simons Boy boilerplate for crossdomain policy. Related files, too.
+   • Add a live search, hide input field. See Unibox and Codrops for example. Make it work well.
+   • Add URLs from Google Static Map API to the contact page
+
+
+
+To get started enter a title for your note above. When you’re ready to save
+your note just use Vim’s :write or :update commands, a filename will be picked
+automatically based on the title.
+                                    * * *
+
+The notes plug-in comes with self hosting documentation. To jump to these notes
+position your cursor on the highlighted name and press ‘gf’ in normal mode:
+
+ • Note taking syntax
+ • Note taking commands

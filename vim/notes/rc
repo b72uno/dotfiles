@@ -1,0 +1,20 @@
+rc
+
+TODO
+  • Sales for products without eka do not register. Make sure they do.
+  • Make sure to invalidate any entries in memcache about product when there is a purchase or sale of that product
+  • When ordering more boards, consider buying megas instead of unos, as you gonna need pins for those keypads.
+  • Hide the token for write ops on db
+
+
+To get started enter a title for your note above. When you’re ready to save
+your note just use Vim’s :write or :update commands, a filename will be picked
+automatically based on the title.
+
+                                    * * *
+
+The notes plug-in comes with self hosting documentation. To jump to these notes
+position your cursor on the highlighted name and press ‘gf’ in normal mode:
+
+ • Note taking syntax
+ • Note taking commands
