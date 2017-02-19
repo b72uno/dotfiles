@@ -24,6 +24,9 @@ unset file
 #Anaconda
 export PATH=/home/clash/anaconda3/bin:$PATH
 
+alias sa='source activate'
+alias sd='source deactivate'
+
 # Case-insensitive globbing (used in pathname expansion)
 shopt -s nocaseglob
 
