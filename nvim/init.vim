@@ -46,6 +46,7 @@ if dein#load_state('/home/clash/.local/share/dein')
   call dein#add('terryma/vim-multiple-cursors')
   call dein#add('dhruvasagar/vim-table-mode')
   call dein#add('tpope/vim-fugitive')
+  call dein#add('vim-airline/vim-airline')
 
 
   " Required:
@@ -182,6 +183,12 @@ nnoremap <leader>e :<C-u>DeniteBufferDir -start-insert -auto-resize file<CR>
 colorscheme gruvbox
 let g_gruvbox_italic = 1
 set background=dark " Setting dark mode
+
+" Airline
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
+
+
 
 " Smooth scroll
 noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 0, 2)<CR>
