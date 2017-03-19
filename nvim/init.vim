@@ -18,6 +18,7 @@ if dein#load_state('/home/clash/.local/share/dein')
   call dein#add('Shougo/denite.nvim')
   call dein#add('Shougo/neomru.vim')
   call dein#add('Shougo/deoplete.nvim')
+  call dein#add('zchee/deoplete-clang')
   call dein#add('Shougo/deol.nvim')
   call dein#add('Shougo/neosnippet.vim')
   call dein#add('Shougo/neosnippet-snippets')
@@ -26,6 +27,7 @@ if dein#load_state('/home/clash/.local/share/dein')
   call dein#add('Shougo/neco-syntax')
   call dein#add('davidhalter/jedi')
   call dein#add('zchee/deoplete-jedi')
+  call dein#add('neomake/neomake')
 
   call dein#add('hynek/vim-python-pep8-indent')
 
@@ -178,6 +180,9 @@ nnoremap <leader>e :<C-u>DeniteBufferDir -start-insert -auto-resize file<CR>
 	      \ '<denite:move_to_previous_line>',
 	      \ 'noremap'
 	      \)
+
+" Neomake
+autocmd! BufWritePost * Neomake
 
 " Gruvbox
 colorscheme gruvbox
