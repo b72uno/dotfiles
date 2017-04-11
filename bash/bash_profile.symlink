@@ -16,6 +16,8 @@ export PATH=/home/clash/anaconda3/bin:$PATH
 
 alias sa='source activate'
 alias sd='source deactivate'
+alias octave="/opt/octave4/bin/octave -q"
+alias studio="/usr/local/android-studio/bin/studio.sh"
 
 # Case-insensitive globbing (used in pathname expansion)
 shopt -s nocaseglob
