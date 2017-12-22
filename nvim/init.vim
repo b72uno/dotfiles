@@ -4,15 +4,15 @@ if &compatible
 endif
 
 " Required:
-set runtimepath+=/home/clash/.local/share/dein/repos/github.com/Shougo/dein.vim
+set runtimepath+=/home/robond/.local/share/dein/repos/github.com/Shougo/dein.vim
 
 " Required:
-if dein#load_state('/home/clash/.local/share/dein')
-  call dein#begin('/home/clash/.local/share/dein')
+if dein#load_state('/home/robond/.local/share/dein')
+  call dein#begin('/home/robond/.local/share/dein')
 
   " Let dein manage dein
   " Required:
-  call dein#add('/home/clash/.local/share/dein/repos/github.com/Shougo/dein.vim')
+  call dein#add('/home/robond/.local/share/dein/repos/github.com/Shougo/dein.vim')
 
   " Add or remove your plugins here:
   call dein#add('Shougo/denite.nvim')
@@ -240,6 +240,7 @@ noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 4)<CR>
   set ttyfast                                         "assume fast terminal connection
   set viewoptions=folds,options,cursor,unix,slash     "unix/windows compatibility
   set encoding=utf-8                                  "set encoding for text
+  set guicursor=
   if exists('$TMUX')
     set clipboard=
   else
@@ -296,7 +297,6 @@ noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 4)<CR>
   endif
 
 " ui configuration 
-  set termguicolors
   set showmatch                                       "automatically highlight matching braces/brackets/etc.
   noremap % v%
   set matchpairs=(:),{:},[:] " List of characters we expect in balanced pairs
@@ -490,16 +490,12 @@ noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 4)<CR>
       au BufWritePost *.bin if &bin | %!xxd
       au BufWritePost *.bin set nomod | endif
   augroup END
-  " Set terminal colors
-  let s:num = 0
-  for s:color in [
-        \ '#6c6c6c', '#ff6666', '#66ff66', '#ffd30a',
-        \ '#1e95fd', '#ff13ff', '#1bc8c8', '#c0c0c0',
-        \ '#383838', '#ff4444', '#44ff44', '#ffb30a',
-        \ '#6699ff', '#f820ff', '#4ae2e2', '#ffffff',
-        \ ]
-    let g:terminal_color_{s:num} = s:color
-    let s:num += 1
-  endfor
-  unlet! s:num
-  unlet! s:color
+  
+  " Makes the background transparent. Leave these out if you're not using a transparent
+  " terminal.
+  highlight Normal ctermbg=NONE guibg=NONE
+  highlight NonText ctermbg=NONE guibg=NONE
+
+  " This is what sets vim to use 24-bit colors. It will also work for any version of neovim
+  " newer than 0.1.4.
+  set termguicolors
