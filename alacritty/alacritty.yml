@@ -126,6 +126,9 @@ colors:
 visual_bell:
   animation: EaseOutExpo
   duration: 0
+  
+# Background opacity
+background_opacity: 0.9
 
 # Key bindings
 #
