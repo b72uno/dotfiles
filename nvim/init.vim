@@ -16,6 +16,7 @@ if dein#load_state('$HOME/.local/share/dein')
 
   " Add or remove your plugins here:
   call dein#add('Shougo/denite.nvim')
+  call dein#add('Shougo/neoyank.vim')
   call dein#add('Shougo/neomru.vim')
   call dein#add('Shougo/deoplete.nvim')
   call dein#add('zchee/deoplete-clang')
@@ -72,7 +73,9 @@ endif
 
 " Use deoplete
  let g:deoplete#enable_at_startup = 1
- "---------------------------------------------------------------------------
+ let g:deoplete#num_processes = 1
+
+"---------------------------------------------------------------------------
 " deoplete.nvim
 "
 
@@ -81,10 +84,10 @@ inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<TAB>" :
       \ deoplete#manual_complete()
-function! s:check_back_space() abort "{{{
+function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~ '\s'
-endfunction"}}}
+endfunction
 
 " <S-TAB>: completion back.
 inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<C-h>"
@@ -93,9 +96,10 @@ inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<C-h>"
 inoremap <expr><C-h> deoplete#smart_close_popup()."\<C-h>"
 inoremap <expr><BS> deoplete#smart_close_popup()."\<C-h>"
 
-inoremap <expr><C-g> deoplete#undo_completion()
+" inoremap <expr><C-g> deoplete#undo_completion()
 " <C-l>: redraw candidates
-inoremap <expr><C-l>       deoplete#refresh()
+inoremap <expr><C-g>       deoplete#refresh()
+inoremap <silent><expr><C-l>       deoplete#complete_common_string()
 
 " <CR>: close popup and save indent.
 inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
@@ -105,18 +109,22 @@ endfunction
 
 inoremap <expr> '  pumvisible() ? deoplete#close_popup() : "'"
 
-" call deoplete#custom#set('_', 'matchers', ['matcher_head'])
-call deoplete#custom#set('ghc', 'sorters', ['sorter_word'])
-" call deoplete#custom#set('buffer', 'mark', '')
-" call deoplete#custom#set('_', 'matchers', ['matcher_full_fuzzy'])
-" call deoplete#custom#set('_', 'disabled_syntaxes', ['Comment', 'String'])
-" call deoplete#custom#set('buffer', 'mark', '*')
+" cpsm test
+" call deoplete#custom#source('_', 'matchers', ['matcher_cpsm'])
+" call deoplete#custom#source('_', 'sorters', [])
+
+" call deoplete#custom#source('_', 'matchers', ['matcher_head'])
+call deoplete#custom#source('ghc', 'sorters', ['sorter_word'])
+" call deoplete#custom#source('buffer', 'mark', '')
+" call deoplete#custom#source('_', 'matchers', ['matcher_full_fuzzy'])
+" call deoplete#custom#source('_', 'disabled_syntaxes', ['Comment', 'String'])
+" call deoplete#custom#source('buffer', 'mark', '*')
 
 " Use auto delimiter
-" call deoplete#custom#set('_', 'converters',
+" call deoplete#custom#source('_', 'converters',
 "       \ ['converter_auto_paren',
 "       \  'converter_auto_delimiter', 'remove_overlap'])
-call deoplete#custom#set('_', 'converters', [
+call deoplete#custom#source('_', 'converters', [
       \ 'converter_remove_paren',
       \ 'converter_remove_overlap',
       \ 'converter_truncate_abbr',
@@ -124,49 +132,32 @@ call deoplete#custom#set('_', 'converters', [
       \ 'converter_auto_delimiter',
       \ ])
 
-" call deoplete#custom#set('buffer', 'min_pattern_length', 9999)
-call deoplete#custom#set('clang', 'input_pattern', '\.\w*|\.->\w*|\w+::\w*')
-call deoplete#custom#set('clang', 'max_pattern_length', -1)
+" call deoplete#custom#source('buffer', 'min_pattern_length', 9999)
+" call deoplete#custom#source('clang', 'input_pattern', '\.\w*|\.->\w*|\w+::\w*')
+" call deoplete#custom#source('clang', 'max_pattern_length', -1)
 
-let g:deoplete#keyword_patterns = {}
-let g:deoplete#keyword_patterns._ = '[a-zA-Z_]\k*\(?'
-" let g:deoplete#keyword_patterns.tex = '\\?[a-zA-Z_]\w*'
-let g:deoplete#keyword_patterns.tex = '[^\w|\s][a-zA-Z_]\w*'
-
-let g:deoplete#omni#input_patterns = {}
-let g:deoplete#omni#input_patterns.python = ''
-let g:deoplete#omni#functions = {}
+call deoplete#custom#option('keyword_patterns', {
+      \ '_': '[a-zA-Z_]\k*\(?',
+      \ 'tex': '[^\w|\s][a-zA-Z_]\w*',
+      \ })
 
 " inoremap <silent><expr> <C-t> deoplete#manual_complete('file')
 
-" let g:deoplete#enable_refresh_always = 1
-let g:deoplete#enable_camel_case = 1
-" let g:deoplete#auto_complete_delay = 50
-" let g:deoplete#auto_complete_start_length = 3
+call deoplete#custom#option('camel_case', v:true)
 
-let g:deoplete#skip_chars = ['(', ')']
-
-" let g:deoplete#enable_profile = 1
+" call deoplete#custom#option('profile', v:true)
 " call deoplete#enable_logging('DEBUG', 'deoplete.log')
-" call deoplete#custom#set('clang', 'debug_enabled', 1)
+" call deoplete#custom#source('clang', 'debug_enabled', 1)
 
-" Unite
-if executable('ag')
-  let g:unite_source_rec_async_command =
-    \ ['ag', '--nocolor', '--nogroup',
-    \  '--depth', '10', '-g', '']
-  " ag is quite fast, so we increase this number
-  let g:unite_source_rec_min_cache_files = 1200
-endif
 
 " Denite
-nnoremap <leader>y :<C-u>Denite history/yank<CR>
-nnoremap <leader>l :<C-u>Denite -start-insert -auto-resize line<CR>
-nnoremap <leader>R :<C-u>Denite register<CR>
-nnoremap <leader>b :<C-u>Denite -start-insert -auto-resize buffer<CR>
-nnoremap <leader>o :<C-u>Denite -auto-resize outline<CR>
-nnoremap <leader>f :<C-u>Denite -start-insert -auto-resize file_rec/git<CR>
-nnoremap <leader>e :<C-u>DeniteBufferDir -start-insert -auto-resize file<CR>
+" nnoremap <leader>y :<C-u>Denite history/yank<CR>
+" nnoremap <leader>l :<C-u>Denite -start-insert -auto-resize line<CR>
+" nnoremap <leader>R :<C-u>Denite register<CR>
+" nnoremap <leader>b :<C-u>Denite -start-insert -auto-resize buffer<CR>
+" nnoremap <leader>o :<C-u>Denite -auto-resize outline<CR>
+" nnoremap <leader>f :<C-u>Denite -start-insert -auto-resize file_rec/git<CR>
+" nnoremap <leader>e :<C-u>DeniteBufferDir -start-insert -auto-resize file<CR>
 
 " Change mappings.
 	call denite#custom#map(
@@ -181,6 +172,75 @@ nnoremap <leader>e :<C-u>DeniteBufferDir -start-insert -auto-resize file<CR>
 	      \ '<denite:move_to_previous_line>',
 	      \ 'noremap'
 	      \)
+
+" [Space]: Other useful commands
+" Smart space mapping.
+nmap  <Space>   [Space]
+nnoremap  [Space]   <Nop>
+
+" Set autoread.
+nnoremap [Space]ar
+      \ :<C-u>call vimrc#toggle_option('autoread')<CR>
+" Set spell check.
+nnoremap [Space]p
+      \ :<C-u>call vimrc#toggle_option('spell')<CR>
+      \: set spelllang=en_us<CR>
+      \: set spelllang+=cjk<CR>
+nnoremap [Space]w
+      \ :<C-u>call vimrc#toggle_option('wrap')<CR>
+
+" Easily edit .vimrc
+nnoremap <silent> [Space]ev  :<C-u>edit $MYVIMRC<CR>
+
+" Useful save mappings.
+nnoremap <silent> <Leader><Leader> :<C-u>update<CR>
+
+  
+ " s: Windows and buffers(High priority)
+ " The prefix key.
+ nnoremap    [Window]   <Nop>
+ nmap    s [Window]
+ nnoremap <silent> [Window]p  :<C-u>vsplit<CR>:wincmd w<CR>
+ nnoremap <silent> [Window]o  :<C-u>only<CR>
+ nnoremap <silent> <Tab>      :wincmd w<CR>
+ nnoremap <silent><expr> q winnr('$') != 1 ? ':<C-u>close<CR>' : ""
+
+  nnoremap <silent> ;r
+        \ :<C-u>Denite -buffer-name=register
+        \ register neoyank<CR>
+  xnoremap <silent> ;r
+        \ :<C-u>Denite -default-action=replace -buffer-name=register
+        \ register neoyank<CR>
+  nnoremap <silent> [Window]<Space>
+        \ :<C-u>Denite file/rec:~/.vim/rc<CR>
+  nnoremap <silent> / :<C-u>Denite -buffer-name=search -auto-highlight
+        \ line<CR>
+  nnoremap <silent> * :<C-u>DeniteCursorWord -buffer-name=search
+        \ -auto-highlight -mode=normal line<CR>
+  nnoremap <silent> [Window]s :<C-u>Denite file/point file/old
+        \ -sorters=sorter/rank
+        \ `finddir('.git', ';') != '' ? 'file/rec/git' : 'file/rec'`
+        \ file file:new<CR>
+  nnoremap <silent><expr> tt  &filetype == 'help' ?  "g\<C-]>" :
+        \ ":\<C-u>DeniteCursorWord -buffer-name=tag -immediately
+        \  tag:include\<CR>"
+  nnoremap <silent><expr> tp  &filetype == 'help' ?
+        \ ":\<C-u>pop\<CR>" : ":\<C-u>Denite -mode=normal jump\<CR>"
+  nnoremap <silent> [Window]n :<C-u>Denite dein<CR>
+  nnoremap <silent> [Window]g :<C-u>Denite ghq<CR>
+  nnoremap <silent> ;g :<C-u>Denite -buffer-name=search
+        \ -no-empty -mode=normal grep<CR>
+  nnoremap <silent> n :<C-u>Denite -buffer-name=search
+        \ -resume -mode=normal -refresh<CR>
+  nnoremap <silent> ft :<C-u>Denite filetype<CR>
+  nnoremap <silent> <C-t> :<C-u>Denite
+        \ -select=`tabpagenr()-1` -mode=normal deol:zsh<CR>
+  nnoremap <silent> <C-k> :<C-u>Denite -mode=normal change jump<CR>
+  nnoremap <silent> [Space]gs :<C-u>Denite gitstatus<CR>
+  nnoremap <silent> ;;
+        \ :<C-u>Denite command command_history<CR>
+
+
 
 " Neomake
 autocmd! BufWritePost * Neomake
