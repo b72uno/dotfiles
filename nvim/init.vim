@@ -30,7 +30,6 @@ if dein#load_state('$HOME/.local/share/dein')
   call dein#add('zchee/deoplete-jedi')
 
   call dein#add('hynek/vim-python-pep8-indent')
-
   call dein#add('plasticboy/vim-markdown')
   call dein#add('elzr/vim-json')
   call dein#add('cespare/vim-toml')
@@ -50,10 +49,16 @@ if dein#load_state('$HOME/.local/share/dein')
   call dein#add('tpope/vim-fugitive')
   call dein#add('vim-airline/vim-airline')
   call dein#add('godlygeek/tabular')
+  " call dein#add('kana/vim-textobj-user')
+  
 
   " Jupyter 
   call dein#add('szymonmaszke/vimpyter')
   call dein#add('w0rp/ale')
+
+  " React/JS
+  call dein#add('pangloss/vim-javascript')
+  call dein#add('mxw/vim-jsx')
 
   " Required:
   call dein#end()
@@ -163,7 +168,7 @@ call deoplete#custom#option('camel_case', v:true)
 
 
 " Vimpyter
-autocmd Filetype ipynb nmap <silent><Leader>jp :VimpyterInsertPythonBlock<CR>
+autocmd Filetype ipynb nmap <silent><Leader>jb :VimpyterInsertPythonBlock<CR>
 autocmd Filetype ipynb nmap <silent><Leader>jj :VimpyterStartJupyter<CR>
 autocmd Filetype ipynb nmap <silent><Leader>jn :VimpyterStartNteract<CR>
 
@@ -541,6 +546,7 @@ noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 4)<CR>
   autocmd FileType java,c,cpp,objc setlocal ts=4 sts=4 sw=4 expandtab
   autocmd FileType vim setlocal ts=2 sts=2 sw=2 expandtab
   autocmd FileType css setlocal ts=2 sts=2 sw=2 expandtab
+  autocmd FileType ipynb setlocal ts=8 sts=4 sw=4 expandtab
 
   " Treat .rss files as XML
   autocmd BufNewFile,BufRead *.rss,*.atom setfiletype xml

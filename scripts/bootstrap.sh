@@ -120,6 +120,11 @@ install_dotfiles () {
 setup_gitconfig
 install_dotfiles
 
+# npm fix
+echo 'changing .config folder ownership'
+sudo chown -R $USER:$(id -gn $USER) /home/clash/.config
+
 echo ''
 echo '  All installed!'
+
 
