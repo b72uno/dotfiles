@@ -28,7 +28,6 @@ if dein#load_state('$HOME/.local/share/dein')
   call dein#add('Shougo/neco-syntax')
   call dein#add('davidhalter/jedi')
   call dein#add('zchee/deoplete-jedi')
-  call dein#add('neomake/neomake')
 
   call dein#add('hynek/vim-python-pep8-indent')
 
@@ -52,6 +51,9 @@ if dein#load_state('$HOME/.local/share/dein')
   call dein#add('vim-airline/vim-airline')
   call dein#add('godlygeek/tabular')
 
+  " Jupyter 
+  call dein#add('szymonmaszke/vimpyter')
+  call dein#add('w0rp/ale')
 
   " Required:
   call dein#end()
@@ -159,6 +161,13 @@ call deoplete#custom#option('camel_case', v:true)
 " nnoremap <leader>f :<C-u>Denite -start-insert -auto-resize file_rec/git<CR>
 " nnoremap <leader>e :<C-u>DeniteBufferDir -start-insert -auto-resize file<CR>
 
+
+" Vimpyter
+autocmd Filetype ipynb nmap <silent><Leader>jp :VimpyterInsertPythonBlock<CR>
+autocmd Filetype ipynb nmap <silent><Leader>jj :VimpyterStartJupyter<CR>
+autocmd Filetype ipynb nmap <silent><Leader>jn :VimpyterStartNteract<CR>
+
+
 " Change mappings.
 	call denite#custom#map(
 	      \ 'insert',
@@ -240,10 +249,6 @@ nnoremap <silent> <Leader><Leader> :<C-u>update<CR>
   nnoremap <silent> ;;
         \ :<C-u>Denite command command_history<CR>
 
-
-
-" Neomake
-autocmd! BufWritePost * Neomake
 
 " Gruvbox
 colorscheme gruvbox
