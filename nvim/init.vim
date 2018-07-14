@@ -29,6 +29,10 @@ if dein#load_state('$HOME/.local/share/dein')
   call dein#add('davidhalter/jedi')
   call dein#add('zchee/deoplete-jedi')
 
+  call dein#add('roxma/vim-hug-neovim-rpc')
+  call dein#add('roxma/nvim-yarp')
+  call dein#add('Shougo/defx.nvim')
+
   call dein#add('hynek/vim-python-pep8-indent')
   call dein#add('plasticboy/vim-markdown')
   call dein#add('elzr/vim-json')

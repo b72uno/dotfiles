@@ -9,3 +9,7 @@
 	helper = cache --timeout=14400
 [alias]
 random = !git commit -m \"`fortune`\"
+[color]
+	ui = auto
+[merge]
+	conflictstyle = diff3
