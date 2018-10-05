@@ -34,3 +34,4 @@ export LANG="en_US"
 complete -W "NSGlobalDomain" defaults
 
 export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="$HOME/google_appengine:$PATH"

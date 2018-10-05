@@ -2,4 +2,4 @@
 
 # added by Anaconda3 installer
 export PATH="/home/clash/anaconda3/bin:$PATH"
-source /home/clash/alacritty/alacritty-completions.bash
+source /home/"$USER"/alacritty/alacritty-completions.bash
