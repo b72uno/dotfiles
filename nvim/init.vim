@@ -550,7 +550,8 @@ noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 4)<CR>
   autocmd FileType java,c,cpp,objc setlocal ts=4 sts=4 sw=4 expandtab
   autocmd FileType vim setlocal ts=2 sts=2 sw=2 expandtab
   autocmd FileType css setlocal ts=2 sts=2 sw=2 expandtab
-  autocmd FileType ipynb setlocal ts=8 sts=4 sw=4 expandtab
+  autocmd FileType ipynb setlocal ts=4 sts=4 sw=4 expandtab
+  autocmd FileType python setlocal ts=4 sts=4 sw=4 expandtab
 
   " Treat .rss files as XML
   autocmd BufNewFile,BufRead *.rss,*.atom setfiletype xml
