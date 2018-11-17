@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-export ZSH=/home/clash/.oh-my-zsh
+export ZSH=~/.oh-my-zsh
 #
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -49,7 +49,7 @@ ZSH_THEME="agnoster"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git tmux z vagrantl node npm pip python virtualenv virtualenvwrapper debian)
+plugins=(git tmux z vagrantl node npm pip python debian)
 
 # User configuration
 
@@ -83,7 +83,6 @@ fi
 alias zshconfig="nvim ~/.zshrc"
 alias ohmyzsh="nvim ~/.oh-my-zsh"
 alias tmux="tmux -2"
-alias pages="nvim /media/clash/Legacy/Dropbox/pages.txt"
 alias n="nvim"
 
 function taocl() {
@@ -94,10 +93,3 @@ function taocl() {
   xmlstarlet unesc | fmt -80
 }
 # taocl()
-
-# virtualenv
-export WORKON_HOME=~/code/envs
-mkdir -p $WORKON_HOME
-source /usr/local/bin/virtualenvwrapper.sh
-
-
