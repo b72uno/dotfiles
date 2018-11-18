@@ -2,7 +2,7 @@
 
 # added by Anaconda3 installer
 export PATH="/home/clash/anaconda3/bin:$PATH"
-source /home/"$USER"/alacritty/alacritty-completions.bash
+# source /home/"$USER"/alacritty/alacritty-completions.bash
 # added by Anaconda2 5.3.0 installer
 # >>> conda init >>>
 # !! Contents within this block are managed by 'conda init' !!

@@ -84,6 +84,7 @@ alias zshconfig="nvim ~/.zshrc"
 alias ohmyzsh="nvim ~/.oh-my-zsh"
 alias tmux="tmux -2"
 alias n="nvim"
+alias tb "taskbook"
 
 function taocl() {
   curl -s https://raw.githubusercontent.com/jlevy/the-art-of-command-line/master/README.md |
