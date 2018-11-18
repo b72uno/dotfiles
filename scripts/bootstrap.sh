@@ -122,7 +122,7 @@ install_dotfiles
 
 # npm fix
 echo 'changing .config folder ownership'
-sudo chown -R $USER:$(id -gn $USER) /home/clash/.config
+sudo chown -R $USER:$(id -gn $USER) $HOME/.config
 
 echo ''
 echo '  All installed!'
