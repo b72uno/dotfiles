@@ -118,7 +118,6 @@ fi
 alias zshconfig="nvim ~/.zshrc"
 alias ohmyzsh="nvim ~/.oh-my-zsh"
 alias tmux="tmux -2"
-alias pages="nvim /media/clash/Legacy/Dropbox/pages.txt"
 alias n="nvim"
 alias tb="taskbook"
 alias sa='source activate'
