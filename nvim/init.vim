@@ -64,6 +64,9 @@ if dein#load_state('$HOME/.local/share/dein')
   call dein#add('pangloss/vim-javascript')
   call dein#add('mxw/vim-jsx')
 
+  " Misc
+  call dein#add('rafi/awesome-vim-colorschemes')
+
   " Required:
   call dein#end()
   call dein#save_state()
@@ -264,9 +267,10 @@ nnoremap <silent> <Leader><Leader> :<C-u>update<CR>
 
 
 " Gruvbox
-colorscheme gruvbox
-let g_gruvbox_italic = 1
-set background=dark " Setting dark mode
+colorscheme afterglow
+let g_afterglow_italic_comments = 1
+" let g_gruvbox_italic = 1
+" set background=dark " Setting dark mode
 
 " Airline
 let g:airline#extensions#tabline#enabled = 1
