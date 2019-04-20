@@ -530,6 +530,14 @@ noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 4)<CR>
   " toggle highlighting search results
   nnoremap <BS> :set hlsearch! hlsearch?<cr>
 
+  " Tabularize
+  if exists(":Tabularize")
+    nmap <Leader>a= :Tabularize /=<CR>
+    vmap <Leader>a= :Tabularize /=<CR>
+    nmap <Leader>a: :Tabularize /:\zs<CR>
+    nmap <Leader>a: :Tabularize /:\zs<CR>
+  endif
+
 
 " autocmd 
   " go back to previous position of cursor if any
