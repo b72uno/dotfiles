@@ -91,7 +91,7 @@ let g:python3_host_prog = '/usr/bin/python3'
 
 " Use deoplete
  let g:deoplete#enable_at_startup = 1
- let g:deoplete#num_processes = 1
+ " let g:deoplete#num_processes = 1
 
 "---------------------------------------------------------------------------
 " deoplete.nvim
