@@ -10,6 +10,7 @@
 [alias]
 random = !git commit -m \"`fortune`\"
 fuckit= !git commit -am \"$(curl -s whatthecommit.com/index.txt)\"
+pom = !git push origin master
 [color]
 	ui = auto
 [merge]
