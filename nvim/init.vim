@@ -54,6 +54,7 @@ if dein#load_state('$HOME/.local/share/dein')
   call dein#add('vim-airline/vim-airline')
   call dein#add('godlygeek/tabular')
   " call dein#add('kana/vim-textobj-user')
+  call dein#add('chrisbra/vim-zsh')
   
 
   " Jupyter 
