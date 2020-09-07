@@ -1,94 +1,270 @@
-"---------------------------------------------------------------------------
-" Vimplug
-
-"Automated installation of vimplug if not installed
-if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
-    silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs
-        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    autocmd VimEnter * PlugInstall --sync | source ~/.config/nvim/init.vim
+"dein Scripts-----------------------------
+if &compatible
+  set nocompatible               " Be iMproved
 endif
 
-call plug#begin('~/.config/nvim/plugged')
+" Required:
+set runtimepath+=$HOME/.local/share/dein/repos/github.com/Shougo/dein.vim
 
-"Autocomplete 
-Plug 'neoclide/coc.nvim', { 'branch': 'release' }
-Plug 'liuchengxu/vista.vim'
-Plug 'gelguy/wilder.nvim'
+" Required:
+if dein#load_state('$HOME/.local/share/dein')
+  call dein#begin('$HOME/.local/share/dein')
 
-"Syntax
-Plug 'dense-analysis/ale'
-Plug 'sheerun/vim-polyglot'
-Plug 'editorconfig/editorconfig-vim'
-Plug 'norcalli/nvim-colorizer.lua'
+  " Let dein manage dein
+  " Required:
+  call dein#add('$HOME/.local/share/dein/repos/github.com/Shougo/dein.vim')
 
-"Fuzzy finder
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
-Plug 'junegunn/fzf.vim'
+  " Add or remove your plugins here:
+  call dein#add('Shougo/denite.nvim')
+  call dein#add('Shougo/neoyank.vim')
+  call dein#add('Shougo/neomru.vim')
+  call dein#add('Shougo/deoplete.nvim')
+  call dein#add('zchee/deoplete-clang')
+  call dein#add('Shougo/deol.nvim')
+  call dein#add('Shougo/neosnippet.vim')
+  call dein#add('Shougo/neosnippet-snippets')
+  call dein#add('tsukkee/unite-tag')
+  call dein#add('ujihisa/neco-look')
+  call dein#add('Shougo/neco-syntax')
+  call dein#add('davidhalter/jedi')
+  call dein#add('zchee/deoplete-jedi')
 
-"Editing
-Plug 'jiangmiao/auto-pairs'
-Plug 'matze/vim-move'
-Plug 'sickill/vim-pasta'
-Plug 'mg979/vim-visual-multi', {'branch': 'master'}
-Plug 'dhruvasagar/vim-table-mode'
-Plug 'godlygeek/tabular'
+  call dein#add('roxma/vim-hug-neovim-rpc')
+  call dein#add('roxma/nvim-yarp')
+  call dein#add('Shougo/defx.nvim')
 
-"Commenting
-Plug 'preservim/nerdcommenter'
-Plug 'tpope/vim-commentary'
+  call dein#add('hynek/vim-python-pep8-indent')
+  call dein#add('plasticboy/vim-markdown')
+  call dein#add('elzr/vim-json')
+  call dein#add('cespare/vim-toml')
+  call dein#add('morhetz/gruvbox')
+  call dein#add('terryma/vim-smooth-scroll')
+  call dein#add('matze/vim-move')
+  call dein#add('tpope/vim-commentary')
+  call dein#add('sickill/vim-pasta')
+  call dein#add('justinmk/vim-sneak')
+  call dein#add('tpope/vim-unimpaired')
+  call dein#add('tpope/vim-repeat')
+  call dein#add('tpope/vim-speeddating')
+  call dein#add('tpope/vim-surround')
+  call dein#add('tmhedberg/matchit')
+  call dein#add('terryma/vim-multiple-cursors')
+  call dein#add('dhruvasagar/vim-table-mode')
+  call dein#add('tpope/vim-fugitive')
+  call dein#add('vim-airline/vim-airline')
+  call dein#add('godlygeek/tabular')
+  " call dein#add('kana/vim-textobj-user')
+  call dein#add('chrisbra/vim-zsh')
+  
 
-"Files
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-Plug 'tpope/vim-sleuth'
-Plug 'ryanoasis/vim-devicons'
+  " Jupyter 
+  call dein#add('szymonmaszke/vimpyter')
+  call dein#add('w0rp/ale')
 
-" Navigation
-Plug 'terryma/vim-smooth-scroll'
-Plug 'wellle/context.vim'
-Plug 'tpope/vim-unimpaired'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-speeddating'
-Plug 'tpope/vim-surround'
-Plug 'justinmk/vim-sneak'
+  " React/JS
+  call dein#add('pangloss/vim-javascript')
+  call dein#add('mxw/vim-jsx')
 
-"Git
-Plug 'tpope/vim-fugitive'
-"
-"Statusbar, color and visual aids
-Plug 'vim-airline/vim-airline'
-Plug 'rafi/awesome-vim-colorschemes'
-Plug 'morhetz/gruvbox'
-Plug 'junegunn/goyo.vim'
-Plug 'junegunn/limelight.vim'
+  " Misc
+  call dein#add('rafi/awesome-vim-colorschemes')
 
-"Misc
-Plug 'ThePrimeagen/vim-be-good'
-Plug 'breuerfelix/vim-todo-lists'
-" Plug 'lervag/vimtex'
-Plug 'chrisbra/vim-zsh'
-Plug 'mattn/emmet-vim'
+  " Required:
+  call dein#end()
+  call dein#save_state()
+endif
 
-call plug#end()
-
+" Required:
 filetype plugin indent on
 syntax enable
 
-let g:python_host_prog = '/usr/bin/python2'
-let g:python3_host_prog = '/usr/bin/python3'
- 
-" Setting of the encoding to use for a save and reading.
-" Make it normal in UTF-8 in Unix.
-if has('vim_starting') && &encoding !=# 'utf-8'
-  if IsWindows() && !has('gui_running')
-    set encoding=cp932
-  else
-    set encoding=utf-8
-  endif
+" If you want to install not installed plugins on startup.
+if dein#check_install()
+  call dein#install()
 endif
 
- 
-"---------------------------------------------------------------------------
+"End dein Scripts-------------------------
+
+let g:python_host_prog = '/usr/bin/python2'
+let g:python3_host_prog = '/usr/bin/python3'
+
+
 " Plugin settings
+
+" Use deoplete
+ let g:deoplete#enable_at_startup = 1
+ " let g:deoplete#num_processes = 1
+
+"---------------------------------------------------------------------------
+" deoplete.nvim
+"
+
+" <TAB>: completion.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ deoplete#manual_complete()
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
+
+" <S-TAB>: completion back.
+inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<C-h>"
+
+" <C-h>, <BS>: close popup and delete backword char.
+inoremap <expr><C-h> deoplete#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> deoplete#smart_close_popup()."\<C-h>"
+
+" inoremap <expr><C-g> deoplete#undo_completion()
+" <C-l>: redraw candidates
+inoremap <expr><C-g>       deoplete#refresh()
+inoremap <silent><expr><C-l>       deoplete#complete_common_string()
+
+" <CR>: close popup and save indent.
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function() abort
+  return deoplete#cancel_popup() . "\<CR>"
+endfunction
+
+inoremap <expr> '  pumvisible() ? deoplete#close_popup() : "'"
+
+" cpsm test
+" call deoplete#custom#source('_', 'matchers', ['matcher_cpsm'])
+" call deoplete#custom#source('_', 'sorters', [])
+
+" call deoplete#custom#source('_', 'matchers', ['matcher_head'])
+call deoplete#custom#source('ghc', 'sorters', ['sorter_word'])
+" call deoplete#custom#source('buffer', 'mark', '')
+" call deoplete#custom#source('_', 'matchers', ['matcher_full_fuzzy'])
+" call deoplete#custom#source('_', 'disabled_syntaxes', ['Comment', 'String'])
+" call deoplete#custom#source('buffer', 'mark', '*')
+
+" Use auto delimiter
+" call deoplete#custom#source('_', 'converters',
+"       \ ['converter_auto_paren',
+"       \  'converter_auto_delimiter', 'remove_overlap'])
+call deoplete#custom#source('_', 'converters', [
+      \ 'converter_remove_paren',
+      \ 'converter_remove_overlap',
+      \ 'converter_truncate_abbr',
+      \ 'converter_truncate_menu',
+      \ 'converter_auto_delimiter',
+      \ ])
+
+" call deoplete#custom#source('buffer', 'min_pattern_length', 9999)
+" call deoplete#custom#source('clang', 'input_pattern', '\.\w*|\.->\w*|\w+::\w*')
+" call deoplete#custom#source('clang', 'max_pattern_length', -1)
+
+call deoplete#custom#option('keyword_patterns', {
+      \ '_': '[a-zA-Z_]\k*\(?',
+      \ 'tex': '[^\w|\s][a-zA-Z_]\w*',
+      \ })
+
+" inoremap <silent><expr> <C-t> deoplete#manual_complete('file')
+
+call deoplete#custom#option('camel_case', v:true)
+
+" call deoplete#custom#option('profile', v:true)
+" call deoplete#enable_logging('DEBUG', 'deoplete.log')
+" call deoplete#custom#source('clang', 'debug_enabled', 1)
+
+
+" Denite
+" nnoremap <leader>y :<C-u>Denite history/yank<CR>
+" nnoremap <leader>l :<C-u>Denite -start-insert -auto-resize line<CR>
+" nnoremap <leader>R :<C-u>Denite register<CR>
+" nnoremap <leader>b :<C-u>Denite -start-insert -auto-resize buffer<CR>
+" nnoremap <leader>o :<C-u>Denite -auto-resize outline<CR>
+" nnoremap <leader>f :<C-u>Denite -start-insert -auto-resize file_rec/git<CR>
+" nnoremap <leader>e :<C-u>DeniteBufferDir -start-insert -auto-resize file<CR>
+
+
+" Vimpyter
+autocmd Filetype ipynb nmap <silent><Leader>jb :VimpyterInsertPythonBlock<CR>
+autocmd Filetype ipynb nmap <silent><Leader>jj :VimpyterStartJupyter<CR>
+autocmd Filetype ipynb nmap <silent><Leader>jn :VimpyterStartNteract<CR>
+
+
+" Change mappings.
+	call denite#custom#map(
+	      \ 'insert',
+	      \ '<C-j>',
+	      \ '<denite:move_to_next_line>',
+	      \ 'noremap'
+	      \)
+	call denite#custom#map(
+	      \ 'insert',
+	      \ '<C-k>',
+	      \ '<denite:move_to_previous_line>',
+	      \ 'noremap'
+	      \)
+
+" [Space]: Other useful commands
+" Smart space mapping.
+nmap  <Space>   [Space]
+nnoremap  [Space]   <Nop>
+
+" Set autoread.
+nnoremap [Space]ar
+      \ :<C-u>call vimrc#toggle_option('autoread')<CR>
+" Set spell check.
+nnoremap [Space]p
+      \ :<C-u>call vimrc#toggle_option('spell')<CR>
+      \: set spelllang=en_us<CR>
+      \: set spelllang+=cjk<CR>
+nnoremap [Space]w
+      \ :<C-u>call vimrc#toggle_option('wrap')<CR>
+
+" Easily edit .vimrc
+nnoremap <silent> [Space]ev  :<C-u>edit $MYVIMRC<CR>
+
+" Useful save mappings.
+nnoremap <silent> <Leader><Leader> :<C-u>update<CR>
+
+  
+ " s: Windows and buffers(High priority)
+ " The prefix key.
+ nnoremap    [Window]   <Nop>
+ nmap    s [Window]
+ nnoremap <silent> [Window]p  :<C-u>vsplit<CR>:wincmd w<CR>
+ nnoremap <silent> [Window]o  :<C-u>only<CR>
+ nnoremap <silent> <Tab>      :wincmd w<CR>
+ nnoremap <silent><expr> q winnr('$') != 1 ? ':<C-u>close<CR>' : ""
+
+  nnoremap <silent> ;r
+        \ :<C-u>Denite -buffer-name=register
+        \ register neoyank<CR>
+  xnoremap <silent> ;r
+        \ :<C-u>Denite -default-action=replace -buffer-name=register
+        \ register neoyank<CR>
+  nnoremap <silent> [Window]<Space>
+        \ :<C-u>Denite file/rec:~/.vim/rc<CR>
+  nnoremap <silent> / :<C-u>Denite -buffer-name=search -auto-highlight
+        \ line<CR>
+  nnoremap <silent> * :<C-u>DeniteCursorWord -buffer-name=search
+        \ -auto-highlight -mode=normal line<CR>
+  nnoremap <silent> [Window]s :<C-u>Denite file/point file/old
+        \ -sorters=sorter/rank
+        \ `finddir('.git', ';') != '' ? 'file/rec/git' : 'file/rec'`
+        \ file file:new<CR>
+  nnoremap <silent><expr> tt  &filetype == 'help' ?  "g\<C-]>" :
+        \ ":\<C-u>DeniteCursorWord -buffer-name=tag -immediately
+        \  tag:include\<CR>"
+  nnoremap <silent><expr> tp  &filetype == 'help' ?
+        \ ":\<C-u>pop\<CR>" : ":\<C-u>Denite -mode=normal jump\<CR>"
+  nnoremap <silent> [Window]n :<C-u>Denite dein<CR>
+  nnoremap <silent> [Window]g :<C-u>Denite ghq<CR>
+  nnoremap <silent> ;g :<C-u>Denite -buffer-name=search
+        \ -no-empty -mode=normal grep<CR>
+  nnoremap <silent> n :<C-u>Denite -buffer-name=search
+        \ -resume -mode=normal -refresh<CR>
+  nnoremap <silent> ft :<C-u>Denite filetype<CR>
+  nnoremap <silent> <C-t> :<C-u>Denite
+        \ -select=`tabpagenr()-1` -mode=normal deol:zsh<CR>
+  nnoremap <silent> <C-k> :<C-u>Denite -mode=normal change jump<CR>
+  nnoremap <silent> [Space]gs :<C-u>Denite gitstatus<CR>
+  nnoremap <silent> ;;
+        \ :<C-u>Denite command command_history<CR>
 
 
 " Gruvbox
@@ -100,6 +276,7 @@ let g_afterglow_italic_comments = 1
 " Airline
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
+
 
 
 " Smooth scroll
@@ -133,10 +310,8 @@ noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 4)<CR>
       bdelete
     endif
   endfunction 
- 
-"---------------------------------------------------------------------------
-" Native config
-"
+
+" base configuration ----------------
 
   let mapleader = ","
   let g:mapleader = ","
@@ -418,12 +593,3 @@ noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 4)<CR>
   " This is what sets vim to use 24-bit colors. It will also work for any version of neovim
   " newer than 0.1.4.
   set termguicolors
-
-  call wilder#enable_cmdline_enter()
-
-  set wildcharm=<Tab>
-  cmap <expr> <Tab> wilder#in_context() ? wilder#next() : "\<Tab>"
-  cmap <expr> <S-Tab> wilder#in_context() ? wilder#previous() : "\<S-Tab>"
-
-  " only / and ? is enabled by default
-  call wilder#set_option('modes', ['/', '?', ':'])
