@@ -362,9 +362,12 @@ noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 4)<CR>
   " quick buffer open
   nnoremap gb :ls<cr>:e #
 
-  " edit/source vimrc 
+  " edit dotfiles 
   nmap <silent> <leader>ev :e $MYVIMRC<CR>
   nmap <silent> <leader>sv :so $MYVIMRC<CR>
+  nmap <silent> <leader>et :e ~/.config/dotfiles/tmux/tmux.conf.symlink<CR>
+  nmap <silent> <leader>ea :e ~/.config/dotfiles/alacritty/alacritty.yml<CR>
+  nmap <silent> <leader>ez :e ~/.config/dotfiles/zsh/zshrc.symlink<CR>
   " 
 
   " underline the current line with '='
