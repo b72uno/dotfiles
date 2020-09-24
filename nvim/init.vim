@@ -11,66 +11,63 @@ endif
 call plug#begin('~/.config/nvim/plugged')
 
 "Autocomplete 
-Plug 'neoclide/coc.nvim', { 'branch': 'release' }
-Plug 'liuchengxu/vista.vim'
-Plug 'gelguy/wilder.nvim'
+Plug 'neoclide/coc.nvim', { 'branch': 'release' } " completion
+Plug 'liuchengxu/vista.vim' " tag viewer
+Plug 'gelguy/wilder.nvim' " better wildmenu
 
 "Syntax
-Plug 'dense-analysis/ale'
-Plug 'sheerun/vim-polyglot'
-Plug 'editorconfig/editorconfig-vim'
-Plug 'norcalli/nvim-colorizer.lua'
-Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
+Plug 'dense-analysis/ale' " linter
+Plug 'sheerun/vim-polyglot' " language packs
+Plug 'editorconfig/editorconfig-vim' " .editoconfig
+Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'} " better Python syntax highlighting
 
 "Fuzzy finder
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' } " fuzzy finder
 Plug 'junegunn/fzf.vim'
 
 "Editing
-Plug 'jiangmiao/auto-pairs'
-Plug 'matze/vim-move'
-Plug 'sickill/vim-pasta'
-Plug 'mg979/vim-visual-multi', {'branch': 'master'}
-Plug 'dhruvasagar/vim-table-mode'
-Plug 'godlygeek/tabular'
-
-"Commenting
-Plug 'preservim/nerdcommenter'
-Plug 'tpope/vim-commentary'
-
-"Files
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-Plug 'tpope/vim-sleuth'
-Plug 'ryanoasis/vim-devicons'
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' } " Tree explorer
+Plug 'mg979/vim-visual-multi', {'branch': 'master'} " multiple cursors
+Plug 'tpope/vim-surround' " surround/delete in pairs
+Plug 'matze/vim-move' " move text up and down without deleting/pasting 
+Plug 'tpope/vim-repeat' " make . work better with plugins
+Plug 'sickill/vim-pasta' " pasting with context
+Plug 'godlygeek/tabular' " aligning text
+Plug 'dhruvasagar/vim-table-mode' " table creator / formatter
+Plug 'preservim/nerdcommenter' " better commenting
+Plug 'tpope/vim-commentary' " ditto
+Plug 'tpope/vim-sleuth' " auto-sets shiftwidth and expandtap
 
 " Navigation
-Plug 'yuttie/comfortable-motion.vim'
-Plug 'wellle/context.vim'
-Plug 'tpope/vim-unimpaired'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-speeddating'
-Plug 'tpope/vim-surround'
-Plug 'justinmk/vim-sneak'
+Plug 'yuttie/comfortable-motion.vim' " better scrolling
+Plug 'wellle/context.vim' " context of visible buffer
+Plug 'tpope/vim-unimpaired' " better brackets
+Plug 'tpope/vim-speeddating' " better incr/decr dates,times etc
+Plug 'justinmk/vim-sneak' " jump to location by 2 characters
 
 "Git
-Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
-"
+Plug 'tpope/vim-fugitive' 
+Plug 'airblade/vim-gitgutter' 
+
 "Statusbar, color and visual aids
 Plug 'vim-airline/vim-airline'
 Plug 'rafi/awesome-vim-colorschemes'
-Plug 'morhetz/gruvbox'
-Plug 'junegunn/goyo.vim'
-Plug 'junegunn/limelight.vim'
+Plug 'morhetz/gruvbox' " colorscheme
+Plug 'junegunn/goyo.vim' " see limelight
+Plug 'junegunn/limelight.vim' " visual range
+Plug 'junegunn/vim-peekaboo' " toggles registers before pasting
+Plug 'roman/golden-ratio' " auto resize active tab
+Plug 'norcalli/nvim-colorizer.lua' " color code highlighter
+Plug 'ryanoasis/vim-devicons'  " visual icons for files
 
 "Misc
-Plug 'ThePrimeagen/vim-be-good'
-Plug 'breuerfelix/vim-todo-lists'
+Plug 'ThePrimeagen/vim-be-good'  " game
+Plug 'breuerfelix/vim-todo-lists' " easier TODO lists
 " Plug 'lervag/vimtex'
-Plug 'chrisbra/vim-zsh'
-Plug 'mattn/emmet-vim'
+" Plug 'chrisbra/vim-zsh' 
+Plug 'mattn/emmet-vim' " easier HTML
 Plug 'tomlion/vim-solidity'
-Plug 'mhinz/vim-startify'
+Plug 'mhinz/vim-startify' " MRU files on startup
 
 call plug#end()
 
@@ -339,7 +336,7 @@ nmap <silent> <leader>ul :t.\|s/./=/g\|set nohls<cr>
 nmap <leader>li :set list! list?<cr>
 
 " toggle highlighting search results
-nnoremap <BS> :set hlsearch! hlsearch?<cr>
+nnoremap <leader>h :set hlsearch! hlsearch?<cr>
 
 " Tabularize  
 if exists(":Tabularize")
@@ -398,8 +395,24 @@ cmap <expr> <S-Tab> wilder#in_context() ? wilder#previous() : "\<S-Tab>"
 call wilder#set_option('modes', ['/', '?', ':'])
 
 "fzf
-nnoremap <silent> <leader>f :FZF<cr>
 nnoremap <silent> <leader>F :FZF ~<cr>
+
+" Open files on enter in a new tab
+let g:fzf_action = {
+\ 'enter': 'tab split',
+\ 'ctrl-x': 'split',
+\ 'ctrl-v': 'vsplit' }
+
+" Limit the window size to 40% screen from the bottom
+let g:fzf_layout = { 'down': '~40%' }
+
+" Mapping for most oftenly used command
+nnoremap <Leader><Leader> :Files<cr>
+
+" Search a file but only within the files that are changed (Git-wise)
+command! Fzfc call fzf#run(fzf#wrap(
+\ {'source': 'git ls-files --exclude-standard --others --modified'}))
+noremap <Leader>] :Fzfc<cr>
 
 " Mapping selecting mappings
 nmap <leader><tab> <plug>(fzf-maps-n)
@@ -580,3 +593,5 @@ let g:ale_fix_on_save = 1
 "NerdTree
 map <F7> :NERDTreeToggle<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+let NERDTreeShowHidden=1 "Always show hiden files
+let NERDTreeQuitOnOpen=1 "Close after opening a file
