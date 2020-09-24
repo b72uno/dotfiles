@@ -70,6 +70,7 @@ Plug 'breuerfelix/vim-todo-lists'
 Plug 'chrisbra/vim-zsh'
 Plug 'mattn/emmet-vim'
 Plug 'tomlion/vim-solidity'
+Plug 'mhinz/vim-startify'
 
 call plug#end()
 
