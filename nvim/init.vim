@@ -401,6 +401,16 @@ call wilder#set_option('modes', ['/', '?', ':'])
 nnoremap <silent> <leader>f :FZF<cr>
 nnoremap <silent> <leader>F :FZF ~<cr>
 
+" Mapping selecting mappings
+nmap <leader><tab> <plug>(fzf-maps-n)
+xmap <leader><tab> <plug>(fzf-maps-x)
+omap <leader><tab> <plug>(fzf-maps-o)
+
+" Insert mode completion
+imap <c-x><c-k> <plug>(fzf-complete-word)
+imap <c-x><c-f> <plug>(fzf-complete-path)
+imap <c-x><c-l> <plug>(fzf-complete-line)
+
 "Coc
 " ====
 " Some servers have issues with backup files, see #649.
@@ -565,3 +575,8 @@ let g:ale_fixers = {
       \}
 nmap <F10> :ALEFix<CR>
 let g:ale_fix_on_save = 1
+
+
+"NerdTree
+map <F7> :NERDTreeToggle<CR>
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
