@@ -1,4 +1,3 @@
-"---------------------------------------------------------------------------
 " Vimplug
 
 "Automated installation of vimplug if not installed
@@ -28,26 +27,28 @@ Plug 'junegunn/fzf.vim'
 "Editing
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' } " Tree explorer
 Plug 'mg979/vim-visual-multi', {'branch': 'master'} " multiple cursors
-Plug 'tpope/vim-surround' " surround/delete in pairs
+Plug 'machakann/vim-sandwich' " surround stuff
+" Plug 'tpope/vim-endwise' " auto adds endings to certain structures
 Plug 'matze/vim-move' " move text up and down without deleting/pasting 
 Plug 'tpope/vim-repeat' " make . work better with plugins
 Plug 'sickill/vim-pasta' " pasting with context
 Plug 'godlygeek/tabular' " aligning text
 Plug 'dhruvasagar/vim-table-mode' " table creator / formatter
-Plug 'preservim/nerdcommenter' " better commenting
-Plug 'tpope/vim-commentary' " ditto
+Plug 'tpope/vim-commentary' " better commenting
 Plug 'tpope/vim-sleuth' " auto-sets shiftwidth and expandtap
+Plug 'andymass/vim-matchup' " better % 
+Plug 'brooth/far.vim' " find and replace
 
 " Navigation
-Plug 'yuttie/comfortable-motion.vim' " better scrolling
 Plug 'wellle/context.vim' " context of visible buffer
 Plug 'tpope/vim-unimpaired' " better brackets
 Plug 'tpope/vim-speeddating' " better incr/decr dates,times etc
 Plug 'justinmk/vim-sneak' " jump to location by 2 characters
 
 "Git
-Plug 'tpope/vim-fugitive' 
+Plug 'tpope/vim-fugitive' " 
 Plug 'airblade/vim-gitgutter' 
+Plug 'junegunn/gv.vim' " git commit browser, requires fugitive
 
 "Statusbar, color and visual aids
 Plug 'vim-airline/vim-airline'
@@ -220,12 +221,6 @@ nmap <silent> <leader>p :set invpaste<CR>:set paste?<CR>
 " Set text wrapping toggles
 nmap <silent> <Leader>tw :set invwrap<CR>:set wrap?<CR>
 
-" remap arrow keys
-nnoremap <left> :bprev<CR>
-nnoremap <right> :bnext<CR>
-nnoremap <up> :tabnext<CR>
-nnoremap <down> :tabprev<CR>
-
 " smash escape
 inoremap jk <esc>
 inoremap kj <esc>
@@ -305,6 +300,13 @@ map <leader>tn :tabnew<CR>
 map <leader>tc :tabclose<CR>
 map <silent> <leader>tm :tabm
 map <silent> <leader>ts :tab split<CR>
+
+" remap arrow keys
+" nnoremap <left> :bprev<CR>
+" nnoremap <right> :bnext<CR>
+" nnoremap <up> :tabnext<CR>
+" nnoremap <down> :tabprev<CR>
+
 
 " toggle scrollbind
 nmap <F6> :windo set scrollbind! diff! diffopt=iwhite scrollbind? diff?<cr>
@@ -577,6 +579,7 @@ nnoremap <silent> <space>e :<C-u>CocList extensions<cr>
 
 
 "ALE
+let g:ale_disable_lsp = 1
 let g:ale_linters = {
       \   'python': ['flake8', 'pylint'],
       \   'ruby': ['standardrb', 'rubocop'],
@@ -588,7 +591,9 @@ let g:ale_fixers = {
       \}
 nmap <F10> :ALEFix<CR>
 let g:ale_fix_on_save = 1
-
+nnoremap ]r :ALENextWrap<CR>  " move to the next ALE warning / error
+nnoremap [r :ALEPreviousWrap<CR> " move to the previous ALE warning / error
+nnoremap <leader>d :ALEDetail<cr> " show the full message
 
 "NerdTree
 map <F7> :NERDTreeToggle<CR>
