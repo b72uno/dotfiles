@@ -13,15 +13,14 @@ export ZSH="$HOME/.oh-my-zsh"
 # Use ripgrep for fzf
 export FZF_DEFAULT_COMMAND="rg --files --hidden -g '!.git/*'"
 
-
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 # ZSH_THEME="tjkirch_mod"
 # ZSH_THEME="Agnoster"
-# ZSH_THEME="random"
-ZSH_THEME="dogenpunk"
+# ZSH_THEME="dogenpunk"
+ZSH_THEME="random"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -124,8 +123,6 @@ fi
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
 alias zshconfig="nvim ~/.zshrc"
 alias ohmyzsh="nvim ~/.oh-my-zsh"
 alias tmux="tmux -2"
@@ -133,6 +130,9 @@ alias n="nvim"
 alias tb="taskbook"
 alias sa="conda activate"
 alias sd="conda deactivate"
+alias fd="fdfind"
+alias ls="exa"
+alias cat="bat"
 
 function taocl() {
   curl -s https://raw.githubusercontent.com/jlevy/the-art-of-command-line/master/README.md |
@@ -141,14 +141,7 @@ function taocl() {
   xmlstarlet sel -t -v "(html/body/ul/li[count(p)>0])[$RANDOM mod last()+1]" |
   xmlstarlet unesc | fmt -80
 }
-# function taocl() {
-# curl -s https://raw.githubusercontent.com/jlevy/the-art-of-command-line/master/README.md |
-#         sed '/cowsay[.]png/d' |
-#         pandoc -f markdown -t html |
-#         xmlstarlet fo --html --dropdtd |
-#         xmlstarlet sel -t -v "(html/body/ul/li[count(p)>0])[$RANDOM mod last()+1]" |
-#         xmlstarlet unesc | fmt -80 | iconv -t US
-# }
+
 taocl()
  
 # virtualenv
