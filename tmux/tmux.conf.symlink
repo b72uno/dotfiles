@@ -14,7 +14,10 @@ bind j selectp -D # switch to panel Down
 bind h selectp -L # switch to panel Left
 bind l selectp -R # switch to panel Right
 
- # List of plugins
+# Install TPM
+# git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+ 
+# List of plugins
 set -g @plugin 'tmux-plugins/tpm'
 set -g @plugin 'tmux-plugins/tmux-sensible'
 set -g @plugin 'odedlaz/tmux-onedark-theme'
