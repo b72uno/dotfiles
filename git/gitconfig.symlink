@@ -5,6 +5,7 @@
 	user = b72uno
 [core]
 	editor = nvim
+	pager = diff-so-fancy | less --tabs=4 -RFX
 [credential]
 	helper = cache --timeout=14400
 [alias]
