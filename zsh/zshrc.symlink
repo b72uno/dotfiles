@@ -85,6 +85,8 @@ plugins=(
   python
   tmux
   z
+  zsh-syntax-highlighting
+  zsh-autosuggestions
 )
 
 # init oh-my-zsh
@@ -122,7 +124,7 @@ fi
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
 #
-# Example aliases
+# Aliases
 alias zshconfig="nvim ~/.zshrc"
 alias ohmyzsh="nvim ~/.oh-my-zsh"
 alias tmux="tmux -2"
