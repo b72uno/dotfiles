@@ -64,8 +64,9 @@ Plug 'ryanoasis/vim-devicons'  " visual icons for files
 "Misc
 Plug 'ThePrimeagen/vim-be-good'  " game
 Plug 'breuerfelix/vim-todo-lists' " easier TODO lists
-" Plug 'lervag/vimtex'
-" Plug 'chrisbra/vim-zsh' 
+Plug 'jpalardy/vim-slime' " REPL
+Plug 'lervag/vimtex' " LaTeX support
+Plug 'chrisbra/vim-zsh' 
 Plug 'mattn/emmet-vim' " easier HTML
 Plug 'tomlion/vim-solidity'
 Plug 'mhinz/vim-startify' " MRU files on startup
@@ -600,3 +601,15 @@ map <F7> :NERDTreeToggle<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 let NERDTreeShowHidden=1 "Always show hiden files
 let NERDTreeQuitOnOpen=1 "Close after opening a file
+
+"Vim-slime
+let g:slime_python_ipython=1
+let g:slime_target = "tmux"
+let g:slime_default_config = {"socket_name": "default", "target_pane": "{last}"} 
+
+"language-specific mappings
+"
+autocmd FileType python map <buffer> <S-e> :w<CR>:!/usr/bin/env python %<CR>
+
+let g:tex_flavor = 'latex' "vimtex
+
