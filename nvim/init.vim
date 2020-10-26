@@ -90,8 +90,8 @@ let g:python3_host_prog = '/usr/bin/python3'
 " Colorscheme
 colorscheme afterglow
 let g_afterglow_italic_comments = 1
-" let g_gruvbox_italic = 1
-" set background=dark " Setting dark mode
+let g_gruvbox_italic = 1
+set background=dark " Setting dark mode
 
 " Airline
 let g:airline#extensions#tabline#enabled = 1
