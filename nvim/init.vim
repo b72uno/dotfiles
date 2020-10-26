@@ -19,6 +19,8 @@ Plug 'dense-analysis/ale' " linter
 Plug 'sheerun/vim-polyglot' " language packs
 Plug 'editorconfig/editorconfig-vim' " .editoconfig
 Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'} " better Python syntax highlighting
+Plug 'jeetsukumaran/vim-pythonsense' "text objects and motions for python
+Plug 'Vimjas/vim-python-pep8-indent' "better whitespace
 
 "Fuzzy finder
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' } " fuzzy finder
@@ -38,6 +40,7 @@ Plug 'tpope/vim-sleuth' " auto-sets shiftwidth and expandtap
 Plug 'andymass/vim-matchup' " better % 
 Plug 'brooth/far.vim' " find and replace
 Plug 'AndrewRadev/splitjoin.vim' " switch between single and multiline
+Plug 'jiangmiao/auto-pairs' " insert and delete brackets etc in pairs
 
 " Navigation
 Plug 'wellle/context.vim' " context of visible buffer
@@ -63,14 +66,15 @@ Plug 'mhinz/vim-startify' " MRU files on startup
 "Statusbar, color and visual aids
 Plug 'vim-airline/vim-airline'
 Plug 'rafi/awesome-vim-colorschemes'
-Plug 'morhetz/gruvbox' " colorscheme
+Plug 'joshdick/onedark.vim' " colorscheme
+" Plug 'morhetz/gruvbox' " colorscheme
 Plug 'junegunn/goyo.vim', { 'on': 'Goyo' } " visual focus
 Plug 'junegunn/limelight.vim', { 'on': 'Goyo' }
 Plug 'junegunn/vim-peekaboo' " toggles registers before pasting
 Plug 'roman/golden-ratio' " auto resize active tab
 Plug 'norcalli/nvim-colorizer.lua' " color code highlighter
 Plug 'ryanoasis/vim-devicons'  " visual icons for files
-Plug 'liuchengxu/vim-which-key'
+Plug 'liuchengxu/vim-which-key' " preview of shortcuts
 
 call plug#end()
 
@@ -83,7 +87,7 @@ let g:python3_host_prog = '/usr/bin/python3'
 "---------------------------------------------------------------------------
 " Plugin settings
 
-" Gruvbox
+" Colorscheme
 colorscheme afterglow
 let g_afterglow_italic_comments = 1
 " let g_gruvbox_italic = 1
