@@ -66,8 +66,7 @@ Plug 'mhinz/vim-startify' " MRU files on startup
 "Statusbar, color and visual aids
 Plug 'vim-airline/vim-airline'
 Plug 'rafi/awesome-vim-colorschemes'
-Plug 'joshdick/onedark.vim' " colorscheme
-" Plug 'morhetz/gruvbox' " colorscheme
+Plug 'morhetz/gruvbox' " colorscheme
 Plug 'junegunn/goyo.vim', { 'on': 'Goyo' } " visual focus
 Plug 'junegunn/limelight.vim', { 'on': 'Goyo' }
 Plug 'junegunn/vim-peekaboo' " toggles registers before pasting
@@ -88,7 +87,7 @@ let g:python3_host_prog = '/usr/bin/python3'
 " Plugin settings
 
 " Colorscheme
-colorscheme afterglow
+colorscheme gruvbox
 let g_afterglow_italic_comments = 1
 let g_gruvbox_italic = 1
 set background=dark " Setting dark mode
