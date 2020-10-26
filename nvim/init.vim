@@ -28,7 +28,6 @@ Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' } " Tree explorer
 Plug 'mg979/vim-visual-multi', {'branch': 'master'} " multiple cursors
 Plug 'machakann/vim-sandwich' " surround stuff
-" Plug 'tpope/vim-endwise' " auto adds endings to certain structures
 Plug 'matze/vim-move' " move text up and down without deleting/pasting 
 Plug 'tpope/vim-repeat' " make . work better with plugins
 Plug 'sickill/vim-pasta' " pasting with context
@@ -38,6 +37,7 @@ Plug 'tpope/vim-commentary' " better commenting
 Plug 'tpope/vim-sleuth' " auto-sets shiftwidth and expandtap
 Plug 'andymass/vim-matchup' " better % 
 Plug 'brooth/far.vim' " find and replace
+Plug 'AndrewRadev/splitjoin.vim' " switch between single and multiline
 
 " Navigation
 Plug 'wellle/context.vim' " context of visible buffer
@@ -50,17 +50,6 @@ Plug 'tpope/vim-fugitive' "
 Plug 'airblade/vim-gitgutter' 
 Plug 'junegunn/gv.vim' " git commit browser, requires fugitive
 
-"Statusbar, color and visual aids
-Plug 'vim-airline/vim-airline'
-Plug 'rafi/awesome-vim-colorschemes'
-Plug 'morhetz/gruvbox' " colorscheme
-Plug 'junegunn/goyo.vim' " see limelight
-Plug 'junegunn/limelight.vim' " visual range
-Plug 'junegunn/vim-peekaboo' " toggles registers before pasting
-Plug 'roman/golden-ratio' " auto resize active tab
-Plug 'norcalli/nvim-colorizer.lua' " color code highlighter
-Plug 'ryanoasis/vim-devicons'  " visual icons for files
-
 "Misc
 Plug 'ThePrimeagen/vim-be-good'  " game
 Plug 'breuerfelix/vim-todo-lists' " easier TODO lists
@@ -70,6 +59,18 @@ Plug 'chrisbra/vim-zsh'
 Plug 'mattn/emmet-vim' " easier HTML
 Plug 'tomlion/vim-solidity'
 Plug 'mhinz/vim-startify' " MRU files on startup
+
+"Statusbar, color and visual aids
+Plug 'vim-airline/vim-airline'
+Plug 'rafi/awesome-vim-colorschemes'
+Plug 'morhetz/gruvbox' " colorscheme
+Plug 'junegunn/goyo.vim', { 'on': 'Goyo' } " visual focus
+Plug 'junegunn/limelight.vim', { 'on': 'Goyo' }
+Plug 'junegunn/vim-peekaboo' " toggles registers before pasting
+Plug 'roman/golden-ratio' " auto resize active tab
+Plug 'norcalli/nvim-colorizer.lua' " color code highlighter
+Plug 'ryanoasis/vim-devicons'  " visual icons for files
+Plug 'liuchengxu/vim-which-key'
 
 call plug#end()
 
@@ -388,8 +389,8 @@ highlight NonText ctermbg=NONE guibg=NONE
 set termguicolors
 
 "Wilder
+"command completion
 call wilder#enable_cmdline_enter()
-
 set wildcharm=<Tab>
 cmap <expr> <Tab> wilder#in_context() ? wilder#next() : "\<Tab>"
 cmap <expr> <S-Tab> wilder#in_context() ? wilder#previous() : "\<S-Tab>"
@@ -397,14 +398,15 @@ cmap <expr> <S-Tab> wilder#in_context() ? wilder#previous() : "\<S-Tab>"
 " only / and ? is enabled by default
 call wilder#set_option('modes', ['/', '?', ':'])
 
+
 "fzf
 nnoremap <silent> <leader>F :FZF ~<cr>
 
 " Open files on enter in a new tab
 let g:fzf_action = {
-\ 'enter': 'tab split',
-\ 'ctrl-x': 'split',
-\ 'ctrl-v': 'vsplit' }
+      \ 'enter': 'tab split',
+      \ 'ctrl-x': 'split',
+      \ 'ctrl-v': 'vsplit' }
 
 " Limit the window size to 40% screen from the bottom
 let g:fzf_layout = { 'down': '~40%' }
@@ -414,7 +416,7 @@ nnoremap <Leader><Leader> :Files<cr>
 
 " Search a file but only within the files that are changed (Git-wise)
 command! Fzfc call fzf#run(fzf#wrap(
-\ {'source': 'git ls-files --exclude-standard --others --modified'}))
+      \ {'source': 'git ls-files --exclude-standard --others --modified'}))
 noremap <Leader>] :Fzfc<cr>
 
 " Mapping selecting mappings
@@ -615,4 +617,10 @@ nmap <leader>sc <Plug>SlimeSendCell
 autocmd FileType python map <buffer> <S-e> :w<CR>:!/usr/bin/env python %<CR>
 
 let g:tex_flavor = 'latex' "vimtex
+
+" vim-which-key
+let g:maplocalleader = "\<Space>"
+let g:mapleader = ','
+nnoremap <silent> <localleader>      :<c-u>WhichKey '<Space>'<CR>
+nnoremap <silent> <leader> :<c-u>WhichKey  ','<CR>
 
