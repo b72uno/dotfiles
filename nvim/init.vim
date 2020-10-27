@@ -58,6 +58,7 @@ Plug 'ThePrimeagen/vim-be-good'  " game
 Plug 'breuerfelix/vim-todo-lists' " easier TODO lists
 Plug 'jpalardy/vim-slime' " REPL
 Plug 'lervag/vimtex' " LaTeX support
+Plug 'fatih/vim-go' "go support
 Plug 'chrisbra/vim-zsh' 
 Plug 'mattn/emmet-vim' " easier HTML
 Plug 'tomlion/vim-solidity'
@@ -347,19 +348,19 @@ nnoremap <leader>h :set hlsearch! hlsearch?<cr>
 
 " Tabularize  
 if exists(":Tabularize")
-  nmap <Leader>a= :Tabularize /=<CR>
-  vmap <Leader>a= :Tabularize /=<CR>
-  nmap <Leader>a: :Tabularize /:\zs<CR>
-  nmap <Leader>a: :Tabularize /:\zs<CR>
+nmap <Leader>a= :Tabularize /=<CR>
+vmap <Leader>a= :Tabularize /=<CR>
+nmap <Leader>a: :Tabularize /:\zs<CR>
+nmap <Leader>a: :Tabularize /:\zs<CR>
 endif
 
 
 " autocmd 
 " go back to previous position of cursor if any
 autocmd BufReadPost *
-      \ if line("'\"") > 0 && line("'\"") <= line("$") |
-      \  exe 'normal! g`"zvzz' |
-      \ endif
+    \ if line("'\"") > 0 && line("'\"") <= line("$") |
+    \  exe 'normal! g`"zvzz' |
+    \ endif
 
 autocmd FileType js,scss,css,python,coffee autocmd BufWritePre <buffer> call StripTrailingWhitespace()
 autocmd FileType css,scss setlocal foldmethod=marker foldmarker={,}
@@ -373,14 +374,14 @@ autocmd BufNewFile,BufRead *.rss,*.atom setfiletype xml
 
 " Binary
 augroup Binary
-  au!
-  au BufReadPre   *.bin let &bin=1
-  au BufReadPost  *.bin if &bin | %!xxd
-  au BufReadPost  *.bin set filetype=xxd | endif
-  au BufWritePre  *.bin if &bin | %!xxd -r
-  au BufWritePre  *.bin endif
-  au BufWritePost *.bin if &bin | %!xxd
-  au BufWritePost *.bin set nomod | endif
+au!
+au BufReadPre   *.bin let &bin=1
+au BufReadPost  *.bin if &bin | %!xxd
+au BufReadPost  *.bin set filetype=xxd | endif
+au BufWritePre  *.bin if &bin | %!xxd -r
+au BufWritePre  *.bin endif
+au BufWritePost *.bin if &bin | %!xxd
+au BufWritePost *.bin set nomod | endif
 augroup END
 
 " Makes the background transparent. Leave these out if you're not using a transparent
@@ -407,9 +408,9 @@ nnoremap <silent> <leader>F :FZF ~<cr>
 
 " Open files on enter in a new tab
 let g:fzf_action = {
-      \ 'enter': 'tab split',
-      \ 'ctrl-x': 'split',
-      \ 'ctrl-v': 'vsplit' }
+    \ 'enter': 'tab split',
+    \ 'ctrl-x': 'split',
+    \ 'ctrl-v': 'vsplit' }
 
 " Limit the window size to 40% screen from the bottom
 let g:fzf_layout = { 'down': '~40%' }
@@ -419,7 +420,7 @@ nnoremap <Leader><Leader> :Files<cr>
 
 " Search a file but only within the files that are changed (Git-wise)
 command! Fzfc call fzf#run(fzf#wrap(
-      \ {'source': 'git ls-files --exclude-standard --others --modified'}))
+    \ {'source': 'git ls-files --exclude-standard --others --modified'}))
 noremap <Leader>] :Fzfc<cr>
 
 " Mapping selecting mappings
@@ -454,30 +455,30 @@ set signcolumn=yes
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
 inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
+    \ pumvisible() ? "\<C-n>" :
+    \ <SID>check_back_space() ? "\<TAB>" :
+    \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
+let col = col('.') - 1
+return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
 " Use <c-space> to trigger completion.
 if has('nvim')
-  inoremap <silent><expr> <c-space> coc#refresh()
+inoremap <silent><expr> <c-space> coc#refresh()
 else
-  inoremap <silent><expr> <c-@> coc#refresh()
+inoremap <silent><expr> <c-@> coc#refresh()
 endif
 
 " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
 " position. Coc only does snippet and additional edit on confirm.
 " <cr> could be remapped by other vim plugin, try `:verbose imap <CR>`.
 if exists('*complete_info')
-  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
 else
-  inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 endif
 
 " Use `[g` and `]g` to navigate diagnostics
@@ -495,11 +496,11 @@ nmap <silent> gr <Plug>(coc-references)
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocActionAsync('doHover')
-  endif
+if (index(['vim','help'], &filetype) >= 0)
+  execute 'h '.expand('<cword>')
+else
+  call CocActionAsync('doHover')
+endif
 endfunction
 
 " Highlight the symbol and its references when holding the cursor.
@@ -513,11 +514,11 @@ xmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
 
 augroup mygroup
-  autocmd!
-  " Setup formatexpr specified filetype(s).
-  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-  " Update signature help on jump placeholder.
-  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+autocmd!
+" Setup formatexpr specified filetype(s).
+autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+" Update signature help on jump placeholder.
+autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
 
 " Applying codeAction to the selected region.
@@ -587,14 +588,14 @@ nnoremap <silent> <space>e :<C-u>CocList extensions<cr>
 "ALE
 let g:ale_disable_lsp = 1
 let g:ale_linters = {
-      \   'python': ['flake8', 'pylint'],
-      \   'ruby': ['standardrb', 'rubocop'],
-      \   'javascript': ['eslint'],
-      \}
+    \   'python': ['flake8', 'pylint'],
+    \   'ruby': ['standardrb', 'rubocop'],
+    \   'javascript': ['eslint'],
+    \}
 
 let g:ale_fixers = {
-      \    'python': ['yapf'],
-      \}
+    \    'python': ['yapf'],
+    \}
 nmap <F10> :ALEFix<CR>
 let g:ale_fix_on_save = 1
 nnoremap ]r :ALENextWrap<CR>  " move to the next ALE warning / error
@@ -627,3 +628,5 @@ let g:mapleader = ','
 nnoremap <silent> <localleader>      :<c-u>WhichKey '<Space>'<CR>
 nnoremap <silent> <leader> :<c-u>WhichKey  ','<CR>
 
+" emmet-vim
+let g:user_emmet_leader_key='<C-e>'
