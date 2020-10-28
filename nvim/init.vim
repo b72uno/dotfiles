@@ -46,8 +46,7 @@ Plug 'jiangmiao/auto-pairs' " insert and delete brackets etc in pairs
 Plug 'wellle/context.vim' " context of visible buffer
 Plug 'tpope/vim-unimpaired' " better brackets
 Plug 'tpope/vim-speeddating' " better incr/decr dates,times etc
-Plug 'justinmk/vim-sneak' " jump to location by 2 characters
-Plug 'easymotion/vim-easymotion'
+Plug 'easymotion/vim-easymotion' " jump to arbitrary spaces
 
 "Git
 Plug 'tpope/vim-fugitive' "
@@ -623,7 +622,7 @@ let NERDTreeQuitOnOpen=1 "Close after opening a file
 
 "Vim-slime
 let g:slime_python_ipython=1
-let g:slime_target = "tmux"
+let g:slime_target = 'tmux'
 let g:slime_default_config = {"socket_name": "default", "target_pane": "{last}"}
 let g:slime_dont_ask_default = 1
 let g:slime_cell_delimiter = "# %%"
@@ -649,9 +648,12 @@ nmap <leader>ct :ContextToggle<cr>
 " easymotion
 map  / <Plug>(easymotion-sn)
 omap / <Plug>(easymotion-tn)
+" 2 char search
+nmap s <Plug>(easymotion-s2)
+nmap t <Plug>(easymotion-t2)
 
 " These `n` & `N` mappings are options. You do not have to map `n` & `N` to EasyMotion.
 " Without these mappings, `n` & `N` works fine. (These mappings just provide
 " different highlight method and have some other features )
-map  n <Plug>(easymotion-next)
+map  n <Plug>(easymotion-next) 
 map  N <Plug>(easymotion-prev)
