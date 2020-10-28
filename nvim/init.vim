@@ -29,7 +29,8 @@ Plug 'junegunn/fzf.vim'
 "Editing
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' } " Tree explorer
 Plug 'mg979/vim-visual-multi', {'branch': 'master'} " multiple cursors
-Plug 'machakann/vim-sandwich' " surround stuff
+" Plug 'machakann/vim-sandwich' " conflicts with sneak and peekaboo
+Plug 'tpope/vim-surround'
 Plug 'matze/vim-move' " move text up and down without deleting/pasting 
 Plug 'tpope/vim-repeat' " make . work better with plugins
 Plug 'sickill/vim-pasta' " pasting with context
@@ -56,12 +57,6 @@ Plug 'junegunn/gv.vim' " git commit browser, requires fugitive
 "Misc
 Plug 'ThePrimeagen/vim-be-good'  " game
 Plug 'breuerfelix/vim-todo-lists' " easier TODO lists
-Plug 'jpalardy/vim-slime' " REPL
-Plug 'lervag/vimtex' " LaTeX support
-Plug 'fatih/vim-go' "go support
-Plug 'chrisbra/vim-zsh' 
-Plug 'mattn/emmet-vim' " easier HTML
-Plug 'tomlion/vim-solidity'
 Plug 'mhinz/vim-startify' " MRU files on startup
 Plug 'honza/vim-snippets' " also install coc-snippets
 
@@ -76,6 +71,14 @@ Plug 'roman/golden-ratio' " auto resize active tab
 Plug 'norcalli/nvim-colorizer.lua' " color code highlighter
 Plug 'ryanoasis/vim-devicons'  " visual icons for files
 Plug 'liuchengxu/vim-which-key' " preview of shortcuts
+
+"Language specific
+Plug 'jpalardy/vim-slime' " REPL
+Plug 'lervag/vimtex' " LaTeX support
+Plug 'fatih/vim-go' "go support
+Plug 'mattn/emmet-vim' " easier HTML
+Plug 'chrisbra/vim-zsh' 
+Plug 'tomlion/vim-solidity'
 
 call plug#end()
 
@@ -291,16 +294,8 @@ nmap <silent> <leader>rc :@"<cr>
 nnoremap <leader>v <C-w>v<C-w>l
 nnoremap <leader>s <C-w>s
 nnoremap <leader>vsa :vert sba<cr>
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
 noremap <silent> <leader>cc :close<CR>
 noremap <silent> <leader>cw :cclose<CR>
-nnoremap <silent> <leader>ml <C-W>L
-nnoremap <silent> <leader>mk <C-W>K
-nnoremap <silent> <leader>mh <C-W>H
-nnoremap <silent> <leader>mj <C-W>J
 
 " tab shortcuts
 map <leader>tn :tabnew<CR>
@@ -313,7 +308,6 @@ map <silent> <leader>ts :tab split<CR>
 " nnoremap <right> :bnext<CR>
 " nnoremap <up> :tabnext<CR>
 " nnoremap <down> :tabprev<CR>
-
 
 " toggle scrollbind
 nmap <F6> :windo set scrollbind! diff! diffopt=iwhite scrollbind? diff?<cr>
@@ -635,7 +629,7 @@ let g:slime_cell_delimiter = "# %%"
 nmap <leader>sc <Plug>SlimeSendCell
 
 "language-specific mappings
-"
+"                                                                 
 autocmd FileType python map <buffer> <S-e> :w<CR>:!/usr/bin/env python %<CR>
 
 let g:tex_flavor = 'latex' "vimtex
@@ -648,3 +642,7 @@ nnoremap <silent> <leader> :<c-u>WhichKey  ','<CR>
 
 " emmet-vim
 let g:user_emmet_leader_key='<C-e>'
+
+" context-vim
+nmap <leader>ct :ContextToggle<cr>
+
