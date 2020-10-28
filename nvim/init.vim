@@ -9,7 +9,7 @@ endif
 
 call plug#begin('~/.config/nvim/plugged')
 
-"Autocomplete 
+"Autocomplete
 Plug 'neoclide/coc.nvim', { 'branch': 'release' } " completion
 Plug 'liuchengxu/vista.vim' " tag viewer
 Plug 'gelguy/wilder.nvim' " better wildmenu
@@ -29,16 +29,15 @@ Plug 'junegunn/fzf.vim'
 "Editing
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' } " Tree explorer
 Plug 'mg979/vim-visual-multi', {'branch': 'master'} " multiple cursors
-" Plug 'machakann/vim-sandwich' " conflicts with sneak and peekaboo
 Plug 'tpope/vim-surround'
-Plug 'matze/vim-move' " move text up and down without deleting/pasting 
+Plug 'matze/vim-move' " move text up and down without deleting/pasting
 Plug 'tpope/vim-repeat' " make . work better with plugins
 Plug 'sickill/vim-pasta' " pasting with context
 Plug 'godlygeek/tabular' " aligning text
 Plug 'dhruvasagar/vim-table-mode' " table creator / formatter
 Plug 'tpope/vim-commentary' " better commenting
 Plug 'tpope/vim-sleuth' " auto-sets shiftwidth and expandtap
-Plug 'andymass/vim-matchup' " better % 
+Plug 'andymass/vim-matchup' " better %
 Plug 'brooth/far.vim' " find and replace
 Plug 'AndrewRadev/splitjoin.vim' " switch between single and multiline
 Plug 'jiangmiao/auto-pairs' " insert and delete brackets etc in pairs
@@ -48,10 +47,11 @@ Plug 'wellle/context.vim' " context of visible buffer
 Plug 'tpope/vim-unimpaired' " better brackets
 Plug 'tpope/vim-speeddating' " better incr/decr dates,times etc
 Plug 'justinmk/vim-sneak' " jump to location by 2 characters
+Plug 'easymotion/vim-easymotion'
 
 "Git
-Plug 'tpope/vim-fugitive' " 
-Plug 'airblade/vim-gitgutter' 
+Plug 'tpope/vim-fugitive' "
+Plug 'airblade/vim-gitgutter'
 Plug 'junegunn/gv.vim' " git commit browser, requires fugitive
 
 "Misc
@@ -77,7 +77,7 @@ Plug 'jpalardy/vim-slime' " REPL
 Plug 'lervag/vimtex' " LaTeX support
 Plug 'fatih/vim-go' "go support
 Plug 'mattn/emmet-vim' " easier HTML
-Plug 'chrisbra/vim-zsh' 
+Plug 'chrisbra/vim-zsh'
 Plug 'tomlion/vim-solidity'
 
 call plug#end()
@@ -105,8 +105,8 @@ let g:airline_powerline_fonts = 1
 let g:comfortable_motion_scroll_down_key = "j"
 let g:comfortable_motion_scroll_up_key = "k"
 
-" functions 
-function! Preserve(command) 
+" functions
+function! Preserve(command)
   " preparation: save last search, and cursor position.
   let _s=@/
   let l = line(".")
@@ -116,11 +116,11 @@ function! Preserve(command)
   " clean up: restore previous search history, and cursor position
   let @/=_s
   call cursor(l, c)
-endfunction 
-function! StripTrailingWhitespace() 
+endfunction
+function! StripTrailingWhitespace()
   call Preserve("%s/\\s\\+$//e")
-endfunction 
-function! CloseWindowOrKillBuffer() 
+endfunction
+function! CloseWindowOrKillBuffer()
   let number_of_windows_to_this_buffer = len(filter(range(1, winnr('$')), "winbufnr(v:val) == bufnr('%')"))
 
   if number_of_windows_to_this_buffer > 1
@@ -128,7 +128,7 @@ function! CloseWindowOrKillBuffer()
   else
     bdelete
   endif
-endfunction 
+endfunction
 
 "---------------------------------------------------------------------------
 " Native config
@@ -190,18 +190,19 @@ set splitbelow
 set splitright
 
 " searching
-set hlsearch                                        "highlight searches
 set incsearch                                       "incremental searching
 set ignorecase                                      "ignore case for searching
 set smartcase                                       "do case-sensitive if there's a capital letter
 set wrapscan                                        "set the search scan to wrap lines
 
-if executable('ack')
-  set grepprg=ack\ --nogroup\ --column\ --smart-case\ --nocolor\ --follow\ $*
-  set grepformat=%f:%l:%c:%m
-endif
+"" allows incsearch highlighting for range commands
+cnoremap $t <CR>:t''<CR>
+cnoremap $T <CR>:T''<CR>
+cnoremap $m <CR>:m''<CR>
+cnoremap $M <CR>:M''<CR>
+cnoremap $d <CR>:d<CR>
 
-" ui configuration 
+"ui configuration
 set showmatch                                       "automatically highlight matching braces/brackets/etc.
 noremap % v%
 set matchpairs=(:),{:},[:] " List of characters we expect in balanced pairs
@@ -218,7 +219,7 @@ set foldlevelstart=99                               "open all folds by default
 set foldopen=block,insert,jump,mark,percent,quickfix,search,tag,undo
 let g:xml_syntax_folding=1                          "enable xml folding
 
-" mappings 
+" mappings
 " formatting shortcuts
 nmap <leader>fef :call Preserve("normal gg=G")<CR>
 nmap <leader>f$ :call StripTrailingWhitespace()<CR>
@@ -238,28 +239,28 @@ inoremap kj <esc>
 " yank the buffer to system register
 nmap <leader>ya :%y+<CR>
 
-" sane regex 
+" sane regex
 nnoremap / /\v
 vnoremap / /\v
 nnoremap ? ?\v
 vnoremap ? ?\v
 nnoremap :s/ :s/\v
-" 
+"
 
-" command-line window 
+" command-line window
 nnoremap q: q:i
 nnoremap q/ q/i
 nnoremap q? q?i
-" 
+"
 
-" folds 
+" folds
 nnoremap zr zr:echo &foldlevel<cr>
 nnoremap zm zm:echo &foldlevel<cr>
 nnoremap zR zR:echo &foldlevel<cr>
 nnoremap zM zM:echo &foldlevel<cr>
-" 
+"
 
-" auto center 
+" auto center
 nnoremap <silent> n nzz
 nnoremap <silent> N Nzz
 nnoremap <silent> * *zz
@@ -282,15 +283,15 @@ nnoremap <leader>fw :execute "vimgrep ".expand("<cword>")." %"<cr>:copen<cr>
 " find last search in quickfix
 nnoremap <leader>ff :execute 'vimgrep /'.@/.'/g %'<cr>:copen<cr>
 
-" CD to the directory containing the file in the buffer 
+" CD to the directory containing the file in the buffer
 nmap <silent> <leader>cd :lcd %:h<CR>:pwd<CR>
 nmap <silent> <leader>md :!mkdir -p %:p:h<CR>
-" 
+"
 
 " run the command that was just yanked
 nmap <silent> <leader>rc :@"<cr>
 
-" shortcuts for windows 
+" shortcuts for windows
 nnoremap <leader>v <C-w>v<C-w>l
 nnoremap <leader>s <C-w>s
 nnoremap <leader>vsa :vert sba<cr>
@@ -324,13 +325,13 @@ nnoremap <silent> Q :call CloseWindowOrKillBuffer()<cr>
 " quick buffer open
 nnoremap gb :ls<cr>:e #
 
-" edit dotfiles 
-nmap <silent> <leader>ev :e $MYVIMRC<CR>
-nmap <silent> <leader>sv :so $MYVIMRC<CR>
-nmap <silent> <leader>et :e ~/.config/dotfiles/tmux/tmux.conf.symlink<CR>
-nmap <silent> <leader>ea :e ~/.config/dotfiles/alacritty/alacritty.yml<CR>
-nmap <silent> <leader>ez :e ~/.config/dotfiles/zsh/zshrc.symlink<CR>
-" 
+" edit dotfiles
+nnoremap <silent> <leader>ev :edit $MYVIMRC<CR>
+nnoremap <silent> <leader>sv :source $MYVIMRC<CR>
+nnoremap <silent> <leader>et :edit ~/.config/dotfiles/tmux/tmux.conf.symlink<CR>
+nnoremap <silent> <leader>ea :edit ~/.config/dotfiles/alacritty/alacritty.yml<CR>
+nnoremap <silent> <leader>ez :edit ~/.config/dotfiles/zsh/zshrc.symlink<CR>
+"
 
 " underline the current line with '='
 nmap <silent> <leader>ul :t.\|s/./=/g\|set nohls<cr>
@@ -341,21 +342,21 @@ nmap <leader>li :set list! list?<cr>
 " toggle highlighting search results
 nnoremap <leader>h :set hlsearch! hlsearch?<cr>
 
-" Tabularize  
+" Tabularize
 if exists(":Tabularize")
-nmap <Leader>a= :Tabularize /=<CR>
-vmap <Leader>a= :Tabularize /=<CR>
-nmap <Leader>a: :Tabularize /:\zs<CR>
-nmap <Leader>a: :Tabularize /:\zs<CR>
+  nmap <Leader>a= :Tabularize /=<CR>
+  vmap <Leader>a= :Tabularize /=<CR>
+  nmap <Leader>a: :Tabularize /:\zs<CR>
+  nmap <Leader>a: :Tabularize /:\zs<CR>
 endif
 
 
-" autocmd 
+" autocmd
 " go back to previous position of cursor if any
 autocmd BufReadPost *
-    \ if line("'\"") > 0 && line("'\"") <= line("$") |
-    \  exe 'normal! g`"zvzz' |
-    \ endif
+      \ if line("'\"") > 0 && line("'\"") <= line("$") |
+      \  exe 'normal! g`"zvzz' |
+      \ endif
 
 autocmd FileType js,scss,css,python,coffee autocmd BufWritePre <buffer> call StripTrailingWhitespace()
 autocmd FileType css,scss setlocal foldmethod=marker foldmarker={,}
@@ -369,14 +370,14 @@ autocmd BufNewFile,BufRead *.rss,*.atom setfiletype xml
 
 " Binary
 augroup Binary
-au!
-au BufReadPre   *.bin let &bin=1
-au BufReadPost  *.bin if &bin | %!xxd
-au BufReadPost  *.bin set filetype=xxd | endif
-au BufWritePre  *.bin if &bin | %!xxd -r
-au BufWritePre  *.bin endif
-au BufWritePost *.bin if &bin | %!xxd
-au BufWritePost *.bin set nomod | endif
+  au!
+  au BufReadPre   *.bin let &bin=1
+  au BufReadPost  *.bin if &bin | %!xxd
+  au BufReadPost  *.bin set filetype=xxd | endif
+  au BufWritePre  *.bin if &bin | %!xxd -r
+  au BufWritePre  *.bin endif
+  au BufWritePost *.bin if &bin | %!xxd
+  au BufWritePost *.bin set nomod | endif
 augroup END
 
 " Makes the background transparent. Leave these out if you're not using a transparent
@@ -403,9 +404,9 @@ nnoremap <silent> <leader>F :FZF ~<cr>
 
 " Open files on enter in a new tab
 let g:fzf_action = {
-    \ 'enter': 'tab split',
-    \ 'ctrl-x': 'split',
-    \ 'ctrl-v': 'vsplit' }
+      \ 'enter': 'tab split',
+      \ 'ctrl-x': 'split',
+      \ 'ctrl-v': 'vsplit' }
 
 " Limit the window size to 40% screen from the bottom
 let g:fzf_layout = { 'down': '~40%' }
@@ -415,7 +416,7 @@ nnoremap <Leader><Leader> :Files<cr>
 
 " Search a file but only within the files that are changed (Git-wise)
 command! Fzfc call fzf#run(fzf#wrap(
-    \ {'source': 'git ls-files --exclude-standard --others --modified'}))
+      \ {'source': 'git ls-files --exclude-standard --others --modified'}))
 noremap <Leader>] :Fzfc<cr>
 
 " Mapping selecting mappings
@@ -464,18 +465,18 @@ let g:coc_snippet_next = '<tab>'
 
 " Use <c-space> to trigger completion.
 if has('nvim')
-inoremap <silent><expr> <c-space> coc#refresh()
+  inoremap <silent><expr> <c-space> coc#refresh()
 else
-inoremap <silent><expr> <c-@> coc#refresh()
+  inoremap <silent><expr> <c-@> coc#refresh()
 endif
 
 " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
 " position. Coc only does snippet and additional edit on confirm.
 " <cr> could be remapped by other vim plugin, try `:verbose imap <CR>`.
 if exists('*complete_info')
-inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
 else
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+  inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 endif
 
 " Use `[g` and `]g` to navigate diagnostics
@@ -493,11 +494,11 @@ nmap <silent> gr <Plug>(coc-references)
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 function! s:show_documentation()
-if (index(['vim','help'], &filetype) >= 0)
-  execute 'h '.expand('<cword>')
-else
-  call CocActionAsync('doHover')
-endif
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocActionAsync('doHover')
+  endif
 endfunction
 
 " Highlight the symbol and its references when holding the cursor.
@@ -511,11 +512,11 @@ xmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
 
 augroup mygroup
-autocmd!
-" Setup formatexpr specified filetype(s).
-autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-" Update signature help on jump placeholder.
-autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+  autocmd!
+  " Setup formatexpr specified filetype(s).
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder.
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
 
 " Applying codeAction to the selected region.
@@ -600,14 +601,14 @@ xmap <leader>x  <Plug>(coc-convert-snippet)
 "ALE
 let g:ale_disable_lsp = 1
 let g:ale_linters = {
-    \   'python': ['flake8', 'pylint'],
-    \   'ruby': ['standardrb', 'rubocop'],
-    \   'javascript': ['eslint'],
-    \}
+      \   'python': ['flake8', 'pylint'],
+      \   'ruby': ['standardrb', 'rubocop'],
+      \   'javascript': ['eslint'],
+      \}
 
 let g:ale_fixers = {
-    \    'python': ['yapf'],
-    \}
+      \    'python': ['yapf'],
+      \}
 nmap <F10> :ALEFix<CR>
 let g:ale_fix_on_save = 1
 nnoremap ]r :ALENextWrap<CR>  " move to the next ALE warning / error
@@ -623,13 +624,12 @@ let NERDTreeQuitOnOpen=1 "Close after opening a file
 "Vim-slime
 let g:slime_python_ipython=1
 let g:slime_target = "tmux"
-let g:slime_default_config = {"socket_name": "default", "target_pane": "{last}"} 
+let g:slime_default_config = {"socket_name": "default", "target_pane": "{last}"}
 let g:slime_dont_ask_default = 1
 let g:slime_cell_delimiter = "# %%"
 nmap <leader>sc <Plug>SlimeSendCell
 
 "language-specific mappings
-"                                                                 
 autocmd FileType python map <buffer> <S-e> :w<CR>:!/usr/bin/env python %<CR>
 
 let g:tex_flavor = 'latex' "vimtex
@@ -646,3 +646,12 @@ let g:user_emmet_leader_key='<C-e>'
 " context-vim
 nmap <leader>ct :ContextToggle<cr>
 
+" easymotion
+map  / <Plug>(easymotion-sn)
+omap / <Plug>(easymotion-tn)
+
+" These `n` & `N` mappings are options. You do not have to map `n` & `N` to EasyMotion.
+" Without these mappings, `n` & `N` works fine. (These mappings just provide
+" different highlight method and have some other features )
+map  n <Plug>(easymotion-next)
+map  N <Plug>(easymotion-prev)
