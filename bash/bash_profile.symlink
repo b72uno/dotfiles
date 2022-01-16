@@ -24,3 +24,4 @@ complete -W "NSGlobalDomain" defaults
 
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/google_appengine:$PATH"
+export PATH="$HOME/.cargo/bin/alacritty:$PATH"
