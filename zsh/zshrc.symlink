@@ -169,4 +169,3 @@ fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 fpath+=${ZDOTDIR:-~}/.zsh_functions
-source /home/clash/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

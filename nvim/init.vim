@@ -62,7 +62,8 @@ Plug 'honza/vim-snippets' " also install coc-snippets
 "Statusbar, color and visual aids
 Plug 'vim-airline/vim-airline'
 Plug 'rafi/awesome-vim-colorschemes'
-Plug 'morhetz/gruvbox' " colorscheme
+"Plug 'morhetz/gruvbox' " colorscheme
+Plug 'dracula/vim' " colorscheme
 Plug 'junegunn/goyo.vim', { 'on': 'Goyo' } " visual focus
 Plug 'junegunn/limelight.vim', { 'on': 'Goyo' }
 Plug 'junegunn/vim-peekaboo' " toggles registers before pasting
@@ -91,10 +92,10 @@ let g:python3_host_prog = '/usr/bin/python3'
 " Plugin settings
 
 " Colorscheme
-colorscheme gruvbox
+colorscheme dracula
 let g_afterglow_italic_comments = 1
-let g_gruvbox_italic = 1
-set background=dark " Setting dark mode
+" let g_gruvbox_italic = 1
+" set background=dark " Setting dark mode
 
 " Airline
 let g:airline#extensions#tabline#enabled = 1
