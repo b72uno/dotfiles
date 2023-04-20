@@ -11,6 +11,7 @@ call plug#begin('~/.config/nvim/plugged')
 
 "Autocomplete
 Plug 'neoclide/coc.nvim', { 'branch': 'release' } " completion
+Plug 'github/copilot.vim' " copilot 
 Plug 'liuchengxu/vista.vim' " tag viewer
 Plug 'gelguy/wilder.nvim' " better wildmenu
 
@@ -40,8 +41,7 @@ Plug 'tpope/vim-sleuth' " auto-sets shiftwidth and expandtap
 Plug 'andymass/vim-matchup' " better %
 Plug 'brooth/far.vim' " find and replace
 Plug 'AndrewRadev/splitjoin.vim' " switch between single and multiline
-" Plug 'jiangmiao/auto-pairs' " insert and delete brackets etc in pairs
-" Plug 'tpope/vim-endwise' " conflicts with Coc
+Plug 'jiangmiao/auto-pairs' " insert and delete brackets etc in pairs
 
 " Navigation
 Plug 'wellle/context.vim' " context of visible buffer
