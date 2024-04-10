@@ -112,6 +112,7 @@ font:
     #   - (Linux/BSD) monospace
     #   - (Windows) Consolas
     # family: Source Code Pro
+    # family: Iosevka
     family: Iosevka Nerd Font
     # family: CodeNewRoman Nerd Font
     # family: RobotoMono Nerd Font

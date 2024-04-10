@@ -87,7 +87,7 @@ filetype plugin indent on
 syntax enable
 
 let g:python_host_prog = '/usr/bin/python2'
-let g:python3_host_prog = '/usr/bin/python3'
+let g:python3_host_prog = '/home/brno/anaconda3/bin/python'
 
 "---------------------------------------------------------------------------
 " Plugin settings
@@ -306,10 +306,10 @@ map <silent> <leader>tm :tabm
 map <silent> <leader>ts :tab split<CR>
 
 " remap arrow keys
-" nnoremap <left> :bprev<CR>
-" nnoremap <right> :bnext<CR>
-" nnoremap <up> :tabnext<CR>
-" nnoremap <down> :tabprev<CR>
+nnoremap <left> :bprev<CR>
+nnoremap <right> :bnext<CR>
+nnoremap <up> :tabnext<CR>
+nnoremap <down> :tabprev<CR>
 
 " toggle scrollbind
 nmap <F6> :windo set scrollbind! diff! diffopt=iwhite scrollbind? diff?<cr>
